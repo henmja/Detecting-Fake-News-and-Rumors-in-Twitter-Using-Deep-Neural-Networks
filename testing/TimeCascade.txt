@@ -1,3 +1,74 @@
+import os, json
+from os import path
+import pandas as pd
+import numpy as np
+import glob
+user_followers = pd.DataFrame()
+user_following = pd.DataFrame()
+for i in range(2):
+    if i == 0:
+        folder = 'user_followers'
+    else:
+        folder = 'user_following'
+    rootdir = 'C:/Users/Kjetil/FakenewsData/_/fakenewsnet_data/'+folder
+    json_pattern = os.path.join(rootdir,'*.json')
+    file_list = glob.glob(json_pattern)
+
+    for j,file in enumerate(file_list):
+        if j>1000:
+            continue
+        #print(file)
+        data = pd.read_json(open(file, "r", encoding="utf8", errors="surrogateescape"), lines=True)
+        if i==0:
+            user_followers = user_followers.append(data, ignore_index = True)
+        else:
+            user_following = user_following.append(data, ignore_index = True)
+            
+with open('dummy_followers.pkl', 'wb') as f:
+            pickle.dump(user_followers, f) 
+with open('dummy_following.pkl', 'wb') as f:
+            pickle.dump(user_following, f)
+user_followers.to_pickle("dummy_followers.pkl")
+user_following.to_pickle("dummy_following.pkl")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+df = pd.read_pickle("../LSTM/bigdataClean.pkl")
+#df = pd.read_pickle("../LSTM/bigdataFollowers.pkl")
+
+followers = pd.read_pickle("../LSTM/dummy_followers.pkl")
+followers.user_id = followers.user_id.astype(str)
+followers = followers.rename(columns={'user_id': 'id_str_user'})
+df = pd.merge(df,followers, on='id_str_user', how='left')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #X-Verdier = mean av hver verdi i alle listene i created_seconds
 #Y-Verdier = mean av hver verdi for alle listene i unique_followers
 
@@ -87,10 +158,12 @@ for key in fakeDF['text'].keys():
     for key_cmp in fakeDF['text'].keys():
         if fakeDF['text'][key]==fakeDF['text'][key_cmp] and fakeDF['created_at'][key]>fakeDF['created_at'][key_cmp]:
             time = fakeDF['created_at'][key]-fakeDF['created_at'][key_cmp]
-            temp = fakeDF['followers'][i].split(', ')
-            print(fakeDF['followers'][i])
-            uniqueFollowers[key].append(len(list(set(temp))))
-            created_seconds[key].append(time.total_seconds())
-            
+            try:
+                temp = fakeDF['followers'][i].split(', ')
+                print(fakeDF['followers'][i])
+                uniqueFollowers[key].append(len(list(set(temp))))
+                created_seconds[key].append(time.total_seconds())
+            except AttributeError:
+                pass
 print(uniqueFollowers)
 #print(created_seconds)
