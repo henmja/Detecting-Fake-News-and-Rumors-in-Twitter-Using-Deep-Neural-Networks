@@ -1,0 +1,96 @@
+#X-Verdier = mean av hver verdi i alle listene i created_seconds
+#Y-Verdier = mean av hver verdi for alle listene i unique_followers
+
+import pandas as pd
+import numpy as np
+from datetime import datetime
+import datetime as dtime
+import matplotlib.pylab as plt
+
+
+#split dataset on class label:
+datasets = {}
+by_class = df.groupby('label')
+        
+for groups, data in by_class:
+    datasets[groups] = data
+
+fakeDF = pd.DataFrame()
+realDF = pd.DataFrame()
+for i, dataset in enumerate(datasets):
+    if i == 0:
+        fakeDF = datasets[dataset]
+    else:
+        realDF = datasets[dataset]
+#print(fakeDF['created_at'].keys())
+fakeDF = fakeDF.reset_index(drop=True)
+#print(fakeDF['created_at'].keys())
+realDF = realDF.reset_index(drop=True)
+
+uniqueFollowers = {}
+Followers_time = {}
+for i,temp in enumerate(fakeDF['created_at']):
+    #print(type(fakeDF['created_at'][i]))
+    if isinstance(fakeDF['created_at'][i],str):
+        l = fakeDF['created_at'][i].split(' ') #split on space, + and -
+        #l = ' '.join(l)
+        year = l[5]
+        del l[5]
+        l.insert(0,year)
+        #l = l.split('-')
+        del l[1]
+        del l[4]
+        l = ' '.join(l)
+        
+        #l = l.split('-')
+        #l[1] = dtime.date(1900, int(l[1]), 1).strftime('%B')
+        #temp = l[1]
+        #l[1] = temp[0:3]
+        #l = ' '.join(l)
+            #print(l)
+        date = datetime.strptime(l,'%Y %b %d %H:%M:%S')
+        #print(date)
+        fakeDF['created_at'][i] = date
+    else:
+        l = str(fakeDF['created_at'][i]).split(' ') #split on space, + and -
+        l = ' '.join(l)
+        l = l.split('+')
+        #print(l[1])
+        #print(l)
+        del l[1]
+        l = ' '.join(l)
+        l = l.split('-')
+        l[1] = dtime.date(1900, int(l[1]), 1).strftime('%B')
+        temp = l[1]
+        l[1] = temp[0:3]
+        l = ' '.join(l)
+            #print(l)
+        date = datetime.strptime(l,'%Y %b %d %H:%M:%S')
+        #print(date)
+        fakeDF['created_at'][i] = date
+        #fakeDF = fakeDF.drop(fakeDF.index[i])
+        #print(type(fakeDF['created_at'][i]))
+#fakeDF=fakeDF.sort_values('created_at')
+
+try:
+    minKey = fakeDF['created_at'].keys()[0]
+except KeyError:
+    pass
+#print(type(fakeDF['created_at'][minKey]))
+#print(type(fakeDF['created_at'][83]))
+created_seconds = {}
+for key in fakeDF['text'].keys():
+    if key not in created_seconds.keys():
+        created_seconds[key] = []
+    if key not in uniqueFollowers.keys():
+        uniqueFollowers[key] = []
+    for key_cmp in fakeDF['text'].keys():
+        if fakeDF['text'][key]==fakeDF['text'][key_cmp] and fakeDF['created_at'][key]>fakeDF['created_at'][key_cmp]:
+            time = fakeDF['created_at'][key]-fakeDF['created_at'][key_cmp]
+            temp = fakeDF['followers'][i].split(', ')
+            print(fakeDF['followers'][i])
+            uniqueFollowers[key].append(len(list(set(temp))))
+            created_seconds[key].append(time.total_seconds())
+            
+print(uniqueFollowers)
+#print(created_seconds)
