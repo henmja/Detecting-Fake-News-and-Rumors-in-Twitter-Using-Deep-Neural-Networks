@@ -47,7 +47,7 @@ import numpy as np
 
 #video_indexes = pd.read_pickle('video_indexes.pkl')
 #print(video_indexes)
-df = pd.read_pickle("../LSTM/bigdata_timeseries.pkl")
+df = pd.read_pickle("../Preprocessing/bigdata_timeseries.pkl")
 #df.tail()
 #print(df.shape)
 #df.drop(df.index[video_indexes],inplace=True)
