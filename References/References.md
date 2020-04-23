@@ -34,3 +34,6 @@ https://medium.com/saarthi-ai/sentence-classification-using-convolutional-neural
 https://chrisalbon.com/deep_learning/keras/visualize_loss_history/ \
 https://stackoverflow.com/questions/50920908/get-confusion-matrix-from-a-keras-multiclass-model \
 https://medium.com/@bedigunjit/simple-guide-to-text-classification-nlp-using-svm-and-naive-bayes-with-python-421db3a72d34 \
+https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.scatter.html \
+https://stackoverflow.com/questions/9378420/how-to-plot-cdf-in-matplotlib-in-python \
+https://www.datacamp.com/community/tutorials/wordcloud-python \
