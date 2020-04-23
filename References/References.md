@@ -1,36 +1,36 @@
 https://www.datacamp.com/community/tutorials/probability-distributions-python \
 https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_pickle.html \
-https://pandas.pydata.org/pandas-docs/version/0.23.3/generated/pandas.DataFrame.to_pickle.html
-https://stackoverflow.com/questions/2186525/how-to-use-glob-to-find-files-recursively
-https://docs.python.org/2/library/glob.html
-https://stackoverflow.com/questions/55833078/i-want-to-explode-an-numpy-array-and-apply-the-values-to-a-single-column-multipl
-https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html
-https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html
-https://stackoverflow.com/questions/10715965/add-one-row-to-pandas-dataframe
-https://stackoverflow.com/questions/40353079/pandas-how-to-check-dtype-for-all-columns-in-a-dataframe
-https://python-forum.io/Thread-coding-utf-8
-https://stackoverflow.com/questions/12070193/why-is-datetime-strptime-not-working-in-this-simple-example
-https://stackoverflow.com/questions/1345827/how-do-i-find-the-time-difference-between-two-datetime-objects-in-python
-https://machinelearningmastery.com/sequence-classification-lstm-recurrent-neural-networks-python-keras/
-https://towardsdatascience.com/machine-learning-recurrent-neural-networks-and-long-short-term-memory-lstm-python-keras-example-86001ceaaebc
-https://datascience.stackexchange.com/questions/18664/how-to-add-extra-word-features-other-then-word-embedding-in-recurrent-neural-net
-https://medium.com/@sabber/classifying-yelp-review-comments-using-lstm-and-word-embeddings-part-1-eb2275e4066b
-https://medium.com/better-programming/python-progress-bars-with-tqdm-by-example-ce98dbbc9697
-https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html
-https://datascience.stackexchange.com/questions/63920/bad-input-shape-5634-2
-https://www.geeksforgeeks.org/removing-stop-words-nltk-python/
-https://tqdm.github.io/docs/notebook/
-https://stackoverflow.com/questions/38224480/remove-decimal-points-and-commas-using-regex-in-python
-https://machinelearningmastery.com/data-preparation-variable-length-input-sequences-sequence-prediction/
-https://medium.com/@sabber/classifying-yelp-review-comments-using-lstm-and-word-embeddings-part-1-eb2275e4066b
-https://machinelearningmastery.com/develop-bidirectional-lstm-sequence-classification-python-keras/
-https://stackoverflow.com/questions/52370136/lstm-after-embedded-layer-value-error-isnt-symbolic-tensor
-https://stackoverflow.com/questions/36428323/lstm-followed-by-mean-pooling
-https://datascience.stackexchange.com/questions/45165/how-to-get-accuracy-f1-precision-and-recall-for-a-keras-model
-https://stackoverflow.com/questions/57524007/smote-and-keras-lstm-in-pipeline-valueerror-not-enough-values-to-unpack-expec
-https://imbalanced-learn.readthedocs.io/en/stable/under_sampling.html
-https://www.tensorflow.org/tensorboard/hyperparameter_tuning_with_hparams
-https://medium.com/saarthi-ai/sentence-classification-using-convolutional-neural-networks-ddad72c7048c
-https://chrisalbon.com/deep_learning/keras/visualize_loss_history/
-https://stackoverflow.com/questions/50920908/get-confusion-matrix-from-a-keras-multiclass-model
-https://medium.com/@bedigunjit/simple-guide-to-text-classification-nlp-using-svm-and-naive-bayes-with-python-421db3a72d34
+https://pandas.pydata.org/pandas-docs/version/0.23.3/generated/pandas.DataFrame.to_pickle.html \
+https://stackoverflow.com/questions/2186525/how-to-use-glob-to-find-files-recursively \
+https://docs.python.org/2/library/glob.html \
+https://stackoverflow.com/questions/55833078/i-want-to-explode-an-numpy-array-and-apply-the-values-to-a-single-column-multipl \
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html \
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html \
+https://stackoverflow.com/questions/10715965/add-one-row-to-pandas-dataframe \
+https://stackoverflow.com/questions/40353079/pandas-how-to-check-dtype-for-all-columns-in-a-dataframe \
+https://python-forum.io/Thread-coding-utf-8 \
+https://stackoverflow.com/questions/12070193/why-is-datetime-strptime-not-working-in-this-simple-example \
+https://stackoverflow.com/questions/1345827/how-do-i-find-the-time-difference-between-two-datetime-objects-in-python \
+https://machinelearningmastery.com/sequence-classification-lstm-recurrent-neural-networks-python-keras/ \
+https://towardsdatascience.com/machine-learning-recurrent-neural-networks-and-long-short-term-memory-lstm-python-keras-example-86001ceaaebc \
+https://datascience.stackexchange.com/questions/18664/how-to-add-extra-word-features-other-then-word-embedding-in-recurrent-neural-net \
+https://medium.com/@sabber/classifying-yelp-review-comments-using-lstm-and-word-embeddings-part-1-eb2275e4066b \
+https://medium.com/better-programming/python-progress-bars-with-tqdm-by-example-ce98dbbc9697 \
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html \
+https://datascience.stackexchange.com/questions/63920/bad-input-shape-5634-2 \
+https://www.geeksforgeeks.org/removing-stop-words-nltk-python/ \
+https://tqdm.github.io/docs/notebook/ \
+https://stackoverflow.com/questions/38224480/remove-decimal-points-and-commas-using-regex-in-python \
+https://machinelearningmastery.com/data-preparation-variable-length-input-sequences-sequence-prediction/ \
+https://medium.com/@sabber/classifying-yelp-review-comments-using-lstm-and-word-embeddings-part-1-eb2275e4066b \
+https://machinelearningmastery.com/develop-bidirectional-lstm-sequence-classification-python-keras/ \
+https://stackoverflow.com/questions/52370136/lstm-after-embedded-layer-value-error-isnt-symbolic-tensor \
+https://stackoverflow.com/questions/36428323/lstm-followed-by-mean-pooling \
+https://datascience.stackexchange.com/questions/45165/how-to-get-accuracy-f1-precision-and-recall-for-a-keras-model \
+https://stackoverflow.com/questions/57524007/smote-and-keras-lstm-in-pipeline-valueerror-not-enough-values-to-unpack-expec \
+https://imbalanced-learn.readthedocs.io/en/stable/under_sampling.html \
+https://www.tensorflow.org/tensorboard/hyperparameter_tuning_with_hparams \
+https://medium.com/saarthi-ai/sentence-classification-using-convolutional-neural-networks-ddad72c7048c \
+https://chrisalbon.com/deep_learning/keras/visualize_loss_history/ \
+https://stackoverflow.com/questions/50920908/get-confusion-matrix-from-a-keras-multiclass-model \
+https://medium.com/@bedigunjit/simple-guide-to-text-classification-nlp-using-svm-and-naive-bayes-with-python-421db3a72d34 \
