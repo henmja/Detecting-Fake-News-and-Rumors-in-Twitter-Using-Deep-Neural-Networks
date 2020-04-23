@@ -1,5 +1,5 @@
-https://www.datacamp.com/community/tutorials/probability-distributions-python
-https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_pickle.html
+https://www.datacamp.com/community/tutorials/probability-distributions-python \
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_pickle.html \
 https://pandas.pydata.org/pandas-docs/version/0.23.3/generated/pandas.DataFrame.to_pickle.html
 https://stackoverflow.com/questions/2186525/how-to-use-glob-to-find-files-recursively
 https://docs.python.org/2/library/glob.html
