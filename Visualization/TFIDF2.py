@@ -2,8 +2,8 @@
 import pickle
 import pandas as pd
 
-fakeArticles = pd.read_pickle("fakeArticlesPD4.pkl")
-realArticles = pd.read_pickle("realArticlesPD4.pkl")
+fakeArticles = pd.read_pickle("fakeArticlesPD.pkl")
+realArticles = pd.read_pickle("realArticlesPD.pkl")
 fakeArticles['label'] = 'fake'
 realArticles['label'] = 'real'
 video_indexes_tfidf = pd.read_pickle('../LSTM/video_indexes_tfidf.pkl')
