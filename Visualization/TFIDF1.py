@@ -6,7 +6,7 @@ fakeArticles = pd.read_pickle("fakeArticlesPD.pkl")
 realArticles = pd.read_pickle("realArticlesPD.pkl")
 fakeArticles['label'] = 'fake'
 realArticles['label'] = 'real'
-video_indexes_tfidf = pd.read_pickle('../LSTM/video_indexes_tfidf.pkl')
+video_indexes_tfidf = pd.read_pickle('../Preprocessing/video_indexes_tfidf.pkl')
 #print(video_indexes)
 #df = pd.read_pickle("bigdataClean.pkl")
 #df.tail()i
