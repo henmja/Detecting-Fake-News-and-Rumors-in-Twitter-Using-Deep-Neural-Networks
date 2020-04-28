@@ -5,8 +5,8 @@ from datetime import datetime
 import datetime as dtime
 from itertools import zip_longest
 import re
-fakeArticlesPD = pd.read_pickle('fakePD.pkl')
-realArticlesPD = pd.read_pickle('realPD.pkl')
+fakeArticlesPD = pd.read_pickle('fakeTimePD.pkl')
+realArticlesPD = pd.read_pickle('realTimePD.pkl')
 
 for row in fakeArticlesPD['created_at_retweets'].keys():
     try: 
