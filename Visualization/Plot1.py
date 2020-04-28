@@ -25,7 +25,7 @@ realArticlesPD = pd.DataFrame(realArticlesDict)
 import pandas as pd
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
-df = pd.read_pickle("../LSTM/bigdataClean.pkl")
+df = pd.read_pickle("../Preprocessing/bigdataClean.pkl")
 df.tail()
 
 
