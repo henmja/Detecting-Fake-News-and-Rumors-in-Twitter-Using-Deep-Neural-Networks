@@ -1,4 +1,6 @@
 #coding: utf-8
+from sklearn.metrics import classification_report
+from sklearn.metrics import roc_auc_score
 from imblearn.over_sampling import SMOTE
 from sklearn.metrics import accuracy_score
 import json
@@ -346,8 +348,24 @@ print(accuracy_score(predictions_SVM, target_Val_Resampled)*100)
 
 import sklearn.metrics as metrics
 #y_pred = (predictions_SVM > 0.5)
+
+print('F1 score')
+print(classification_report(target_Val_Resampled, predictions_SVM))
+
+auc = roc_auc_score(target_Val_Resampled, predictions_prob)
+
 matrix = metrics.confusion_matrix(target_Val_Resampled, predictions_SVM)
 print(matrix)
+
+micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
+print('micro')
+print(micro)
+print('macro')
+macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1,0]))/2
+print(macro)
+print('auc')
+print(auc)
+
 #fig = plt.figure()
 #plt.matshow(matrix)
 #plt.title('Confusion Matrix')
