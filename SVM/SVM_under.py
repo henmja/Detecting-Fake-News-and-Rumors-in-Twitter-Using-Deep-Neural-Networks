@@ -415,3 +415,4 @@ plt.savefig("accuracy"+".png", bbox_inches='tight')
 print(matrix)
 ###LAGRE matrix (confusion mattrix)
 
+
