@@ -347,7 +347,7 @@ predictions_SVM = SVM.predict(combined_Val_Resampled)
 # Use accuracy_score function to get the accuracy
 print(predictions_SVM)
 print('F1 score')
-print(classification_report(target_Val_Resampled, predictions_SVM))
+print(classification_report(target_Val_Resampled, predictions_SVM,digits=3))
 print(accuracy_score(predictions_SVM, target_Val_Resampled)*100)
 
 predictions_prob = SVM.predict_proba(combined_Val_Resampled)
