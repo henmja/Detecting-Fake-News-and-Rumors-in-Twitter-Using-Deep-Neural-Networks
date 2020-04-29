@@ -421,7 +421,7 @@ print(target_Val_Resampled.shape)
 #print(predictions.shape)
 predictions_bool = np.argmax(predictions, axis=1)
 print(predictions_bool.shape)
-print(classification_report(target_Val_Resampled, predictions_bool))
+print(classification_report(target_Val_Resampled, predictions_bool, digits=3))
 #predictions_probs = model.predict(combined_Val_Resampled, verbose=0)
 #predictions_probs = predictions_probs[:,0]
 predictions_prob = model.predict_proba(combined_Val_Resampled)
