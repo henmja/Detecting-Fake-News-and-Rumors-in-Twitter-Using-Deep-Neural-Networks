@@ -351,7 +351,7 @@ predictions_NB = Naive.predict(combined_Val_Resampled)
 print(predictions_NB)
 print('F1 score')
 print(classification_report(target_Val_Resampled, predictions_NB))
-print(accuracy_score(predictions_NB, target_Val_Resampled)*100)
+print(accuracy_score(predictions_NB, target_Val_Resampled, digits=3)*100)
 
 predictions_prob = Naive.predict_proba(combined_Val_Resampled)
 #target_cat = to_categorical(target_Val_Resampled)
