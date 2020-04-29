@@ -350,7 +350,7 @@ predictions_NB = Naive.predict(combined_Val_Resampled)
 # Use accuracy_score function to get the accuracy
 print(predictions_NB)
 print('F1 score')
-print(classification_report(target_Val_Resampled, predictions_NB))
+print(classification_report(target_Val_Resampled, predictions_NB, digits=3))
 print(accuracy_score(predictions_NB, target_Val_Resampled)*100)
 
 predictions_prob = Naive.predict_proba(combined_Val_Resampled)
