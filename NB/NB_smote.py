@@ -1,8 +1,8 @@
 #coding: utf-8
-from imblearn.over_sampling import SMOTE
-from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
+from imblearn.over_sampling import SMOTE
+from sklearn.metrics import accuracy_score
 import json
 import matplotlib.pyplot as plt
 #langdetect
@@ -351,19 +351,27 @@ combined_Val_Resampled, target_Val_Resampled = oversample.fit_resample(combined_
 #target_Val = to_categorical(target_Val)
 
 predictions_NB = Naive.predict(combined_Val_Resampled)
-# Use accuracy_score function to get the accuracy
-print(predictions_NB)
 print('F1 score')
 print(classification_report(target_Val_Resampled, predictions_NB, digits=3))
 print(accuracy_score(predictions_NB, target_Val_Resampled)*100)
+# Use accuracy_score function to get the accuracy
+print(predictions_NB)
 print(accuracy_score(predictions_NB, target_Val_Resampled)*100)
-
+predictions_prob = Naive.predict_proba(combined_Val_Resampled)
+predictions_prob = np.argmax(predictions_prob, axis=1)
 auc = roc_auc_score(target_Val_Resampled, predictions_prob)
 
 import sklearn.metrics as metrics
 #y_pred = (predictions_SVM > 0.5)
 matrix = metrics.confusion_matrix(target_Val_Resampled, predictions_NB)
 print(matrix)
+#fig = plt.figure()
+#plt.matshow(matrix)
+#plt.title('Confusion Matrix')
+#plt.colorbar()
+#plt.ylabel('True Label')
+#plt.xlabel('Predicated Label')
+#plt.savefig(matrix+'.jpg')
 micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
 print('micro')
 print(micro)
@@ -372,14 +380,6 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 print('auc')
 print(auc)
-#fig = plt.figure()
-#plt.matshow(matrix)
-#plt.title('Confusion Matrix')
-#plt.colorbar()
-#plt.ylabel('True Label')
-#plt.xlabel('Predicated Label')
-#plt.savefig(matrix+'.jpg')
-
 accuracy_mat = matrix.diagonal()/matrix.sum(axis=1)
 print(accuracy_mat)
 
