@@ -1,6 +1,6 @@
 #coding: utf-8
-from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import classification_report
 from imblearn.over_sampling import SMOTE
 from sklearn.metrics import accuracy_score
 import json
@@ -306,7 +306,7 @@ features_Train = features_Train[target_Train.index.values]
 oversample = SMOTE()
 features_Train_Resampled, target_Train_Resampled = oversample.fit_resample(features_Train, target_Train)
 
-SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto', verbose=2, max_iter=10000)
+SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto', verbose=2, max_iter=10000,probability=True)
 history = SVM.fit(features_Train_Resampled,target_Train_Resampled)
 #with open('history', 'wb') as file_pi:
 #    pickle.dump(history.history, file_pi)
@@ -348,15 +348,16 @@ print(accuracy_score(predictions_SVM, target_Val_Resampled)*100)
 
 import sklearn.metrics as metrics
 #y_pred = (predictions_SVM > 0.5)
-
 print('F1 score')
 print(classification_report(target_Val_Resampled, predictions_SVM,digits=3))
 
+predictions_prob = SVM.predict_proba(combined_Val_Resampled)
+predictions_prob = np.argmax(predictions_prob, axis=1)
 auc = roc_auc_score(target_Val_Resampled, predictions_prob)
 
 matrix = metrics.confusion_matrix(target_Val_Resampled, predictions_SVM)
-print(matrix)
 
+print(matrix)
 micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
 print('micro')
 print(micro)
@@ -365,7 +366,6 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 print('auc')
 print(auc)
-
 #fig = plt.figure()
 #plt.matshow(matrix)
 #plt.title('Confusion Matrix')
