@@ -350,7 +350,7 @@ import sklearn.metrics as metrics
 #y_pred = (predictions_SVM > 0.5)
 
 print('F1 score')
-print(classification_report(target_Val_Resampled, predictions_SVM))
+print(classification_report(target_Val_Resampled, predictions_SVM,digits=3))
 
 auc = roc_auc_score(target_Val_Resampled, predictions_prob)
 
