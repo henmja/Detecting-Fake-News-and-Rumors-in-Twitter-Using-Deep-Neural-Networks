@@ -342,7 +342,7 @@ combined_Val_Resampled, target_Val_Resampled = oversample.fit_resample(combined_
 predictions_SVM = SVM.predict(combined_Val_Resampled)
 # Use accuracy_score function to get the accuracy
 print(predictions_SVM)
-print(accuracy_score(predictions_SVM, target_Val_Resampled)*100)
+print(accuracy_score(predictions_SVM, target_Val_Resampled, digits=3)*100)
 
 import sklearn.metrics as metrics
 #y_pred = (predictions_SVM > 0.5)
