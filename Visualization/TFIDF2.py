@@ -136,7 +136,7 @@ ax.set_ylabel('Probability')
 fig.suptitle('TF-IDF CDF', fontsize=20)
 plt.xlim(0,0.8)
 plt.show()
-plt.savefig("TF-IDF CDF"+".png", bbox_inches='tight')
+plt.savefig("TF-IDF_CDF"+".png", bbox_inches='tight')
 
 
 
