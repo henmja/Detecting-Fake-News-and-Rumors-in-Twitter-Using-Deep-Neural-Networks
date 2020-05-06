@@ -102,7 +102,7 @@ for i,col in enumerate(num_Features):
         mat = pd.concat([mat, col], axis=1)
 
 x = mat.values #returns a numpy array
-min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-0.5,0.5))
+min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0,1))
 x_scaled = min_max_scaler.fit_transform(x)
 num_Norm = pd.DataFrame(x_scaled)
 
