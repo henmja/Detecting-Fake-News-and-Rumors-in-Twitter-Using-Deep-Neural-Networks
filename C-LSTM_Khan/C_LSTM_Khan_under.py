@@ -61,7 +61,7 @@ from imblearn.under_sampling import RandomUnderSampler
 #print(video_indexes)
 df = pd.read_pickle("bigdata_timeseries.pkl")
 print('before')
-#df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
+df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 stemmer = SnowballStemmer("english")
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
