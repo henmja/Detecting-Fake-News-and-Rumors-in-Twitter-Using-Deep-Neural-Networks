@@ -17,7 +17,6 @@ for row in fakeArticlesPD['created_at_retweets'].keys():
         dates = []
         created_date = None
         for i,date in enumerate(fakeArticlesPD['created_at_retweets'][row]):
-        #print(fakeArticlesPD['created_at_retweets'][row])
 
         
             l = date.split(' ') #split on space, + and -
@@ -25,8 +24,7 @@ for row in fakeArticlesPD['created_at_retweets'].keys():
             if not re.search('[a-zA-Z]', l[0]):
                 del l[0]
           
-        
-        #print(l)
+
             try:
                 del l[4]
                 l[0] = l[4]
@@ -34,15 +32,12 @@ for row in fakeArticlesPD['created_at_retweets'].keys():
                 l = ' '.join(l)
                 date = datetime.strptime(l,'%Y %b %d %H:%M:%S') #year-month-day(number)
                 dates.append(date)
-            
-            #print('date')
-            #print(date)
+
                 if i == 0:
                     created_time = str(fakeArticlesPD['created_at'][row])
                     l = created_time.split(' ') #split on space, + and -
                     l = ' '.join(l)
                     l = l.split('+')
-    #print(l)
     
                     del l[1]
                     l = ' '.join(l)
@@ -51,14 +46,13 @@ for row in fakeArticlesPD['created_at_retweets'].keys():
                     temp = l[1]
                     l[1] = temp[0:3]
                     l = ' '.join(l)
-        #print(l)
+
                     created_date = datetime.strptime(l,'%Y %b %d %H:%M:%S')
-                #print('created_date')
-                #print(created_date)
+
                     dif = date-created_date
-                #print(dif)
+
                     dif_seconds = dif.total_seconds()
-                #print(dif_seconds)
+
                     fakeArticlesPD['created_at_retweets'][row][i] = dif_seconds/(60*60*24)
                 else:
                     dif = date-created_date
@@ -74,17 +68,9 @@ for row in fakeArticlesPD['created_at_retweets'].keys():
         pass
     except IndexError:
         pass
-        #fakeArticlesPD['created_at_retweets'][row][i] = date
-#for row in fakeArticlesPD['created_at_retweets'].keys(): 
-    #np.cumsum(np.array(fakeArticlesPD['created_at_retweets'][row]))
-    
-#fakeArticlesPD.fillna(0, inplace=True)
-#for record in fakeArticlesPD['created_at_retweets']:
-#    print(record)
 
 
 for row in fakeArticlesPD['created_at_retweets'].keys(): 
-    #fakeArticlesPD['created_at_retweets'][row] = str(fakeArticlesPD['created_at_retweets'][row]).strip('][')
     if not re.search(r'\d', str(fakeArticlesPD['created_at_retweets'][row])):
         fakeArticlesPD['created_at_retweets'][row] = [0]
 a = fakeArticlesPD['created_at_retweets']
@@ -97,13 +83,10 @@ maxLen = 0
 for flws in a:
     if len(flws)>maxLen:
         maxLen = len(flws)
-    #print(maxLen)
 for i,flws in enumerate(a):
-    #print(i)
     while len(flws)<maxLen:
         flws = np.append(a[i],np.nan)
         a[i] = flws
-#a = [np.nan if x == 0 else x for x in a]
 x = np.nanmean(a,axis=0)
 print(x)
 
@@ -117,7 +100,6 @@ for row in realArticlesPD['created_at_retweets'].keys():
         dates = []
         created_date = None
         for i,date in enumerate(realArticlesPD['created_at_retweets'][row]):
-            #print(realArticlesPD['created_at_retweets'][row])
 
 
             l = date.split(' ') #split on space, + and -
@@ -125,8 +107,6 @@ for row in realArticlesPD['created_at_retweets'].keys():
             if not re.search('[a-zA-Z]', l[0]):
                 del l[0]
 
-
-            #print(l)
             try:
                 del l[4]
                 l[0] = l[4]
@@ -135,14 +115,11 @@ for row in realArticlesPD['created_at_retweets'].keys():
                 date = datetime.strptime(l,'%Y %b %d %H:%M:%S') #year-month-day(number)
                 dates.append(date)
             
-            #print('date')
-            #print(date)
                 if i == 0:
                     created_time = str(realArticlesPD['created_at'][row])
                     l = created_time.split(' ') #split on space, + and -
                     l = ' '.join(l)
                     l = l.split('+')
-        #print(l)
 
                     del l[1]
                     l = ' '.join(l)
@@ -151,34 +128,24 @@ for row in realArticlesPD['created_at_retweets'].keys():
                     temp = l[1]
                     l[1] = temp[0:3]
                     l = ' '.join(l)
-            #print(l)
+
                     created_date = datetime.strptime(l,'%Y %b %d %H:%M:%S')
-                    #print('created_date')
-                    #print(created_date)
+
                     dif = date-created_date
-                    #print(dif)
+
                     dif_seconds = dif.total_seconds()
-                    #print(dif_seconds)
+
                     realArticlesPD['created_at_retweets'][row][i] = dif_seconds/(60*60*24)
                 else:
                     dif = date-created_date
                     dif_seconds = dif.total_seconds()
                     realArticlesPD['created_at_retweets'][row][i] = dif_seconds/(60*60*24)
             except IndexError:
-                print('IndexError')
     except AttributeError:
         pass
-        #realArticlesPD['created_at_retweets'][row][i] = date
-#for row in realArticlesPD['created_at_retweets'].keys(): 
-    #np.cumsum(np.array(realArticlesPD['created_at_retweets'][row]))
-    
-#realArticlesPD.fillna(0, inplace=True)
-#for record in realArticlesPD['created_at_retweets']:
-#    print(record)
 
 
 for row in realArticlesPD['created_at_retweets'].keys(): 
-    #realArticlesPD['created_at_retweets'][row] = str(realArticlesPD['created_at_retweets'][row]).strip('][')
     if not re.search(r'\d', str(realArticlesPD['created_at_retweets'][row])):
         realArticlesPD['created_at_retweets'][row] = [0]
 a = realArticlesPD['created_at_retweets']
@@ -191,21 +158,14 @@ maxLen = 0
 for flws in a:
     if len(flws)>maxLen:
         maxLen = len(flws)
-    #print(maxLen)
 for i,flws in enumerate(a):
-    #print(i)
     while len(flws)<maxLen:
         flws = np.append(a[i],np.nan)
         a[i] = flws
-#a = [np.nan if x == 0 else x for x in a]
 x2 = np.nanmean(a,axis=0)
 print(x2)
 
 
-#fiks x (fÃ¸rste element er minus created_at, resten er created_at_Retweets minus forrige created_at_retweets dato)
-#fyll inn nans og regn ut means
-#copy paste real
-#fiks cdf, og followers (read retweets)
 import pandas as pd
 import numpy as np
 from itertools import zip_longest
@@ -235,12 +195,10 @@ for row in realArticlesPD['followers_count_retweets'].keys():
     except AttributeError:
         realArticlesPD['followers_count_retweets'][row] = [0]
 
-#fakeArticlesPD.fillna(0, inplace=True)
 a = fakeArticlesPD['followers_count_retweets']
 a=[np.array(xi) for xi in a]
 print(type(a))
 maxLen = 0
-#set all follower lists to same length:
 for flws in a:
     if len(flws)>maxLen:
         maxLen = len(flws)
@@ -250,18 +208,9 @@ for i,flws in enumerate(a):
     while len(flws)<maxLen:
         flws = np.append(a[i],np.nan)
         a[i] = flws
-#a = [np.nan if x == 0 else x for x in a]
 y = np.nanmean(a,axis=0)
 print(y)
-#sums = list(zip(*a))
-#zipped_list = sums[:]
-#print(zipped_list)
-#y = a.mean(axis=0)
-#print(y.shape)
-#Convert datetime
 
-#realArticlesPD['created_at_retweets']
-#realArticlesPD['followers_count_retweets']
 import pandas as pd
 import numpy as np
 from itertools import zip_longest
@@ -279,36 +228,22 @@ for row in realArticlesPD['followers_count_retweets'].keys():
     except AttributeError:
         realArticlesPD['followers_count_retweets'][row] = [0]
 
-#realArticlesPD.fillna(0, inplace=True)
 a2 = realArticlesPD['followers_count_retweets']
 a2=[np.array(xi) for xi in a2]
 print(a2)
 maxLen = 0
-#set all follower lists to same length:
+#add padding to follower lists:
 for flws in a2:
     if len(flws)>maxLen:
         maxLen = len(flws)
-    #print(maxLen)
 for i,flws in enumerate(a2):
-    #print(i)
     while len(flws)<maxLen:
         flws = np.append(a2[i],np.nan)
         a2[i] = flws
 print(a2)
-#a = [np.nan if x == 0 else x for x in a]
 y2 = np.nanmean(a2,axis=0)
 print(y2)
-#sums = list(zip(*a))
-#zipped_list = sums[:]
-#print(zipped_list)
-#y = a.mean(axis=0)
-#print(y.shape)
-#Convert datetime
 
-
-
-
-#Combine x and y to dic
 import collections
 
 d = dict(zip(x,y))
@@ -329,7 +264,7 @@ d2 = dict(zip(x2,y2))
 
 od2 = collections.OrderedDict(sorted(d2.items()))
 
-#print(list(od.values()))
+
 x2_sorted = list(od2)
 print(x2_sorted)
 y2_cumsum = np.cumsum(list(od2.values()))
@@ -346,7 +281,6 @@ ax.plot(x, y, 'r', label='fake')
 x2 = np.arange(len(x2))
 y2 = np.cumsum(y2)
 ax.plot(x2, y2, 'g', label='real')
-#ax.plot(x2, y2, 'g', label='real')
     
 ax.set_xlabel('Hops (Retweets)')
 ax.set_ylabel('Followers Reached')
@@ -366,13 +300,11 @@ ax.plot(x_sorted, y_cumsum, 'r', label='fake')
 x2_sorted = np.append(x2_sorted,x2_sorted[-1])
 y2_cumsum = np.append(y2_cumsum,y2_cumsum[-1])
 ax.plot(x2_sorted, y2_cumsum, 'g', label='real')
-#ax.plot(x2, y2, 'g', label='real')
     
 ax.set_xlabel('Time (Seconds)')
 ax.set_ylabel('Followers Reached')
 ax.legend()
 
-#plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
 
 plt.savefig("Time_Cascade"+".png", bbox_inches='tight')
 
