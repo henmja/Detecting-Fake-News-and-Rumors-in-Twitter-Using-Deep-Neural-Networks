@@ -121,7 +121,6 @@ print('Number of Terms:', len(term_Index))
 sen_Len = 162 # max length of each sentences, including padding
 tok_Features = pad_sequences(sequences, padding = 'post', maxlen = sen_Len-111)
 print('Shape of tokenized features tensor:', tok_Features.shape)
-#print('Shape of label tensor:', label.shape)
 
 indices = np.arange(tok_Features.shape[0])
 np.random.shuffle(indices)
