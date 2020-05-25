@@ -7,10 +7,6 @@ realArticles = pd.read_pickle("realArticlesPD.pkl")
 fakeArticles['label'] = 'fake'
 realArticles['label'] = 'real'
 video_indexes_tfidf = pd.read_pickle('../Preprocessing/video_indexes_tfidf.pkl')
-#print(video_indexes)
-#df = pd.read_pickle("bigdataClean.pkl")
-#df.tail()i
-#fake_video_indexes = video_indexes[:]
 bigdata = realArticles.append(fakeArticles, ignore_index=True)
 print(bigdata.shape)
 bigdata.drop(bigdata.index[video_indexes_tfidf],inplace=True)
@@ -23,12 +19,6 @@ for row in fakeArticles['text'].keys():
     fakeArticles['text'][row]=fakeArticles['text'][row].replace('Loading','')
     fakeArticles['text'][row]=fakeArticles['text'][row].replace('Please enable cookies on your web browser in order to continue','')
     fakeArticles['text'][row] = re.sub(r'''(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?Â«Â»â€œâ€â€˜â€™]))''', " ", fakeArticles['text'][row])
-
-
-#fakeArticles['text'][row] = re.sub('http://\S+|https://\S+', '', fakeArticles['text'][row])
-#fakeArticles['text'][row] = re.sub('http[s]?://\S+', '',fakeArticles['text'][row])
-#fakeArticles = fakeArticles[~fakeArticles.text.str.contains("http")]
-#fakeArticles = fakeArticles[~fakeArticles.text.str.contains(".com")]
 
 print(fakeArticles['text'])
 
@@ -66,7 +56,6 @@ realArticles = realArticles[~realArticles.text.str.contains(u"ø", na=False)]
 realArticles = realArticles[~realArticles.text.str.contains(u"å",na=False)]
 
 fakeArticles.reset_index(drop=True,inplace=True)
-#realArticles = realArticles[~realArticles.text.str.contains("rr")]
 realArticles.reset_index(drop=True, inplace=True)
 
 import nltk
@@ -121,17 +110,10 @@ for i, art in enumerate(fakeArticles['text']):
             wordsList[j] = wordsList[j].replace("â€˜â€˜","")
             wordsList[j] = wordsList[j].replace("â€™â€™","")
             wordsList[j] = re.sub('\d', '', wordsList[j])
-            #remove non english words:
-            
-            #numberswordsList[i] = word.replace("â€œ","")
 
-
-        
         wordsList = [x for x in wordsList if x not in stopwords.words('english')]
-        #wordsList = [remove_symbols(i) for i in wordsList]
         uniqueWords = []
         for word in wordsList:
-            #print(word)
             counts = {}
             if word not in counts.keys():
                 uniqueWords.append(word)
@@ -142,17 +124,13 @@ for i, art in enumerate(fakeArticles['text']):
             if word not in fakeArticlesTermFreq[i].keys():
                 fakeArticlesTermFreq[i][word] = 0
             for n_word in counts:
-            #print(counts[n_word])
                 fakeArticlesTermFreq[i][word]=counts[n_word]/len(wordsList)
-    #print(fakeArticlesTermFreq[user])
-    #print(fakeUsersTermFreq[user])
     except KeyError:
         fakeIndexes.append(i)
         pass
 realIndexes = [] 
 terms={}
 for i, art in enumerate(realArticles['text']):
-        #print(fakeArticlesPD['text'][row])
     try:
         terms[i] = realArticles['text'][i].split()
         words = str(terms[i])
@@ -189,12 +167,8 @@ for i, art in enumerate(realArticles['text']):
             wordsList[j] = wordsList[j].replace("â€™â€™","")
             wordsList[j] = re.sub('\d', '', wordsList[j])
         wordsList = [x for x in wordsList if x not in stopwords.words('english')]
-        #wordsList = [remove_symbols(i) for i in wordsList]
-        #uniqueWords = set(wordsList)
-        #print(uniqueWords)
         uniqueWords = []
         for word in wordsList:
-            #print(word)
             counts = {}
             if word not in counts.keys():
                 uniqueWords.append(word)
@@ -205,7 +179,6 @@ for i, art in enumerate(realArticles['text']):
             if word not in realArticlesTermFreq[i].keys():
                 realArticlesTermFreq[i][word] = 0
             for n_word in counts:
-            #print(counts[n_word])
                 realArticlesTermFreq[i][word]=counts[n_word]/len(wordsList)
     except KeyError:
         realIndexes.append(i+len(fakeArticles['text']))
@@ -218,8 +191,6 @@ with open('realArticlesTermFreq.pickle', 'wb') as handle:
     pickle.dump(realArticlesTermFreq, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-
-#IDF = LOG(N_art/Ni_term) - number of documents/number of documents term appear in
 import math
 N_art_tot = len(fakeArticles)+len(realArticles)
 fakeArticlesIDF = {}
@@ -230,7 +201,6 @@ userTerms = {}
 
 
 for i, art in enumerate(fakeArticles['text']):
-        #print(fakeArticlesPD['text'][row])
     try:
         terms[i] = fakeArticles['text'][i].split()
         words = str(terms[i])
@@ -263,9 +233,6 @@ for i, art in enumerate(fakeArticles['text']):
             wordsList[j] = wordsList[j].replace("[","")
             wordsList[j] = re.sub('\d', '', wordsList[j])
         wordsList = [x for x in wordsList if x not in stopwords.words('english')]
-        #wordsList = [remove_symbols(i) for i in wordsList]
-        #uniqueWords = set(wordsList)
-        #print(uniqueWords)
         for word in wordsList:
             if word not in counts.keys():
                 counts[word] = 0
@@ -273,8 +240,7 @@ for i, art in enumerate(fakeArticles['text']):
                 counts[word] += 1
         N_art += 1      
     except KeyError:
-        pass
-print('check')   
+        pass  
        
 N_art = 0
 userTerms = {}
@@ -319,7 +285,6 @@ for i, art in enumerate(realArticles['text']):
         N_art += 1 
     except KeyError:
         pass
-print('check')  
 
 
 for i, art in enumerate(fakeArticles['text']):
@@ -329,7 +294,6 @@ for i, art in enumerate(fakeArticles['text']):
             terms[i] = []
             uniqueWords = []
             fakeArticlesIDF[i] = {}
-        #print(fakeArticlesPD['text'][row])
             terms[i] = fakeArticles['text'][i].split()
             words = str(terms[i])
             wordsList = words.split()
@@ -361,10 +325,6 @@ for i, art in enumerate(fakeArticles['text']):
             wordsList[j] = wordsList[j].replace("&","")
             wordsList[j] = re.sub('\d', '', wordsList[j])
         wordsList = [x for x in wordsList if x not in stopwords.words('english')]
-        #wordsList = [remove_symbols(i) for i in wordsList]
-        #uniqueWords = set(wordsList)
-        #print(uniqueWords)
-            #print(word)
         for word in wordsList:
             if word not in uniqueWords:
                 uniqueWords.append(word)
@@ -372,12 +332,8 @@ for i, art in enumerate(fakeArticles['text']):
             if word not in fakeArticlesIDF[i].keys():
                 fakeArticlesIDF[i][word] = 0
             for count in counts:
-            #print(counts[n_word])
                 fakeArticlesIDF[i][word]=math.log(1+N_art_tot/(1+counts[word])) #+1 to avoid zero division
-        #print(fakeArticlesIDF[i])
     except KeyError:
-        #if i not in fakeIndexes:
-        #    fakeIndexes.append(i)
         pass
 print('check')  
       
@@ -387,8 +343,7 @@ for i, art in enumerate(realArticles['text']):
         try:
             terms[i] = []
             uniqueWords = []
-            realArticlesIDF[i] = {}
-        #print(fakeArticlesPD['text'][row])
+            realArticlesIDF[i] = {}'
             terms[i] = realArticles['text'][i].split()
             words = str(terms[i])
             wordsList = words.split()
@@ -420,10 +375,6 @@ for i, art in enumerate(realArticles['text']):
             wordsList[j] = wordsList[j].replace("&","")
             wordsList[j] = re.sub('\d', '', wordsList[j])
         wordsList = [x for x in wordsList if x not in stopwords.words('english')]
-        #wordsList = [remove_symbols(i) for i in wordsList]
-        #uniqueWords = set(wordsList)
-        #print(uniqueWords)
-        #print(word)
         for word in wordsList:
             if word not in uniqueWords:
                 uniqueWords.append(word)
@@ -431,13 +382,9 @@ for i, art in enumerate(realArticles['text']):
             if word not in realArticlesIDF[i].keys():
                 realArticlesIDF[i][word] = 0
             for count in counts:
-            #print(counts[n_word])
                 realArticlesIDF[i][word]=math.log(1+N_art_tot/(1+counts[word])) #+1 to avoid zero division
     except KeyError:
-        #if (i+len(fakeArticles['text'])) not in realIndexes:
-            #realIndexes.append(i+len(fakeArticles['text']))
         pass
-    #print(fakeArticlesIDF[i])
 
 import pickle
 with open('fakeIDF.pickle', 'wb') as handle:
