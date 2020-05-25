@@ -5,7 +5,6 @@ exploded = bigdata.urls_description_entities_user.apply(pd.Series)
 exploded.columns = [str(col) + '_urls_description_entities_user' for col in exploded.columns]
 bigdata = pd.concat([bigdata.drop(columns='urls_description_entities_user'), exploded], axis=1)
 
-#change name of 1 to one
 temp = bigdata.columns.values; 
 temp[bigdata.columns.get_loc('0_urls_description_entities_user')] = 'zero_urls_description_entities_user';
 bigdata.columns = temp
@@ -14,7 +13,6 @@ exploded = bigdata.zero_urls_description_entities_user.apply(pd.Series)
 exploded.columns = [str(col) + '_zero_urls_description_entities_user' for col in exploded.columns]
 bigdata = pd.concat([bigdata.drop(columns='zero_urls_description_entities_user'), exploded], axis=1)
 
-#flatten indices and symbols_entities
 exploded = bigdata.indices_zero_urls_entities.apply(pd.Series)
 exploded.columns = [str(col) + '_indices_zero_urls_entities' for col in exploded.columns]
 bigdata = pd.concat([bigdata.drop(columns='indices_zero_urls_entities'), exploded], axis=1)
@@ -43,10 +41,6 @@ exploded = bigdata.symbols_entities.apply(pd.Series)
 exploded.columns = [str(col) + '_symbols_entities' for col in exploded.columns]
 bigdata = pd.concat([bigdata.drop(columns='symbols_entities'), exploded], axis=1)
 
-#user_followers = pd.read_pickle('./dummy_followers.pickle')
-#user_followers = pd.DataFrame(user_followers)
-#user_following = pd.read_pickle('./dummy_following.pickle')
-#user_following = pd.DataFrame(user_following)
 user_followers = pd.read_pickle('dummy_followers.pkl')
 user_following = pd.read_pickle('dummy_following.pkl')
 user_followers.user_id = user_followers.user_id.astype(str)
