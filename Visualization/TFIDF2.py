@@ -18,11 +18,9 @@ for art in fakeArticlesTermFreq:
     if art not in fakeArticlesTFIDF.keys():
         fakeArticlesTFIDF[art] = {}
     for word in fakeArticlesTermFreq[art]:
-        #print(word)
         if word not in fakeArticlesTFIDF[art].keys():
             fakeArticlesTFIDF[art][word] = 1
         try:
-            #print(word)
             if word:
                 fakeArticlesTFIDF[art][word] = fakeArticlesTermFreq[art][word]*fakeArticlesIDF[art][word]
         except KeyError:
@@ -34,26 +32,22 @@ for art in realArticlesTermFreq:
         realArticlesTFIDF[art] = {}
     for word in realArticlesTermFreq[art]:
         if word not in realArticlesTFIDF[art].keys() or word == 're' or word == 'Pre' or word == 'Youve':
-            #vals = np.max(realArticlesTFIDF[art])
             realArticlesTFIDF[art][word] = 1
         try:
             test = word.encode('utf-8')
             print(word)
-            #word = re.sub('[ -~]', '', word)
             if word and b'\\' not in test:
                 realArticlesTFIDF[art][word] = realArticlesTermFreq[art][word]*realArticlesIDF[art][word]
         except KeyError:
             pass
         except UnicodeEncodeError:
             pass
-#print(realArticlesTFIDF)
 
 import matplotlib.pyplot as plt
 import math
 import copy
 import numpy as np
 import pandas as pd
-#import seaborn as sns
 
 fakeTFIDF = copy.deepcopy(fakeArticlesTFIDF)
 realTFIDF = copy.deepcopy(realArticlesTFIDF)
@@ -140,14 +134,11 @@ plt.savefig("TF-IDF_CDF"+".png", bbox_inches='tight')
 
 
 
-#TF-IDF Wordcloud
-#ONLY ADD ENGLISH WORDS TO TOP 50
+#TF-IDF Wordcloud most unique words
 from wordcloud import WordCloud
-#top 50 TF-IDF Array
 import copy
 real_TFIDF = copy.deepcopy(realArticlesTFIDF)
 fake_TFIDF = copy.deepcopy(fakeArticlesTFIDF)
-#print(real_TFIDF[1])
 top_50_real_tfidf = []
 top_50_real_tfidf_val = []
 temp = ''
@@ -156,16 +147,10 @@ for i in range(50):
     top_50_real_tfidf.append('')
     top_50_real_tfidf_val.append(0)
     for user in real_TFIDF:
-        #print(user)
         try:
             for tfidf in real_TFIDF[user]:
-            #print(real_TFIDF[user])
-            #if tfidf==list(real_TFIDF[user].keys())[-1]:
-            #    print(tfidf)
-            #print(tfidf)
                 if real_TFIDF[user][tfidf]>=top_50_real_tfidf_val[i]:
                     top_50_real_tfidf[i] = tfidf
-                    #temp = user
         except TypeError:
             pass
     for user in real_TFIDF:
@@ -175,16 +160,7 @@ for i in range(50):
             pass
         except AttributeError:
             pass
-    #try:
-    #    if user==list(real_TFIDF.keys())[-1] and tfidf==list(real_TFIDF[user].keys())[-1]:
-    #        print(top_50_real_tfidf[i])
-    #        try:
-            #print(top_50_real_tfidf[i])
-    #            real_TFIDF[temp]=real_TFIDF[temp].pop(top_50_real_tfidf[i])
-    #        except IndexError:
-    #            pass
-    #except AttributeError:
-    #    pass
+
 top_50_fake_tfidf = []
 top_50_fake_tfidf_val = []
 temp = ''
@@ -194,13 +170,8 @@ for i in range(50):
     for user in fake_TFIDF:
         try:
             for tfidf in fake_TFIDF[user]:
-            #print(fake_TFIDF[user])
-            #print(user)
-            #print(tfidf)
-            #print(i)
                 if fake_TFIDF[user][tfidf]>=top_50_fake_tfidf_val[i]:
                     top_50_fake_tfidf[i] = tfidf
-                    #temp = user
         except TypeError:
             pass
     for user in fake_TFIDF:
@@ -210,15 +181,6 @@ for i in range(50):
             pass
         except AttributeError:
             pass
-    #try:
-    #    if user==list(fake_TFIDF.keys())[-1] and tfidf==list(real_TFIDF[user].keys())[-1]:
-    #        try:
-    #            fake_TFIDF[temp].pop(top_50_fake_tfidf[i])
-    #        except IndexError:
-    #            pass
-    #except AttributeError:
-    #    pass
-#print(top_50_real_tfidf)
 
 with open('/local/home/henrikm/Fakenews_Classification/real_TFIDF.pickle', 'wb') as handle:
         pickle.dump(real_TFIDF, handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -227,7 +189,6 @@ with open('/local/home/henrikm/Fakenews_Classification/fake_TFIDF.pickle', 'wb')
 
 import matplotlib.pyplot as plt
 
-#convert list to string and generate
 unique_string=(" ").join(top_50_real_tfidf)
 wordcloud = WordCloud(width = 1000, height = 500).generate(unique_string)
 plt.figure(figsize=(15,8))
@@ -236,7 +197,6 @@ plt.axis("off")
 plt.savefig("real_TFIDF_Wordcloud"+".png", bbox_inches='tight')
 
 
-#convert list to string and generate
 unique_string=(" ").join(top_50_fake_tfidf)
 wordcloud = WordCloud(width = 1000, height = 500).generate(unique_string)
 plt.figure(figsize=(15,8))
@@ -246,19 +206,15 @@ plt.savefig("fake_TFIDF_Wordcloud"+".png", bbox_inches='tight')
 
 
 import numpy as np
-#TF-IDF Wordcloud
-#ONLY ADD ENGLISH WORDS TO TOP 50
+#TF-IDF Wordcloud most common terms
 from wordcloud import WordCloud
-#top 50 TF-IDF Array
 import copy
 real_TFIDF = copy.deepcopy(realArticlesTFIDF)
 fake_TFIDF = copy.deepcopy(fakeArticlesTFIDF)
-#print(real_TFIDF[1])
 top_50_real_tfidf = []
 top_50_real_tfidf_val = []
 temp = ''
 real_i = 0
-#while len(top_50_real_tfidf_val)<50:
 for i in range(50):
 #    print(real_i)
     real_i += 1
@@ -266,15 +222,8 @@ for i in range(50):
     print(i)
     top_50_real_tfidf.append('')
     for user in real_TFIDF:
-        #print(user)
         try:
-            #max_tfidf = max(real_TFIDF[user].values())
-            #print(max(real_TFIDF[user].values()).encode('utf-8'))
-            #if max(real_TFIDF[user].values()).encode('utf-8') == 'b'+max(real_TFIDF[user].values()):
             max_tfidf = max(real_TFIDF[user].values())
-            #else:
-                #real_TFIDF[user].pop(real_TFIDF[fake_i])
-                #continue
             max_keys = [k for k, v in real_TFIDF[user].items() if v == max_tfidf]
             top_50_real_tfidf[i] = max_keys[0]
             if max_Appended==False:
@@ -282,10 +231,6 @@ for i in range(50):
                 max_Appended=True
             try:
                 for tfidf in real_TFIDF[user]:
-            #print(real_TFIDF[user])
-            #if tfidf==list(real_TFIDF[user].keys())[-1]:
-            #    print(tfidf)
-            #print(tfidf)
                     try:
                         print('realTFIDF')
                         print(tfidf)
@@ -306,33 +251,15 @@ for i in range(50):
             pass
         except AttributeError:
             pass
-    #try:
-    #    if user==list(real_TFIDF.keys())[-1] and tfidf==list(real_TFIDF[user].keys())[-1]:
-    #        print(top_50_real_tfidf[i])
-    #        try:
-            #print(top_50_real_tfidf[i])
-    #            real_TFIDF[temp]=real_TFIDF[temp].pop(top_50_real_tfidf[i])
-    #        except IndexError:
-    #            pass
-    #except AttributeError:
-    #    pass
 top_50_fake_tfidf = []
 top_50_fake_tfidf_val = []
 temp = ''
 for i in range(50):
-#fake_i = 0
-#while len(top_50_fake_tfidf_val)<50:
-    #print(fake_i)
-    #fake_i += 1
     max_Appended = False
     top_50_fake_tfidf.append('')
     for user in fake_TFIDF:
-        try:
-            #if max(fake_TFIDF[user].values()).encode('utf-8') == 'b'+max(fake_TFIDF[user].values()):    
+        try:   
             max_tfidf = max(fake_TFIDF[user].values())
-            #else:
-                #fake_TFIDF[user].pop(fake_TFIDF[fake_i])
-                #continue
             max_keys = [k for k, v in fake_TFIDF[user].items() if v == max_tfidf]
             top_50_fake_tfidf[i] = max_keys[0]
             if max_Appended==False:
@@ -340,10 +267,6 @@ for i in range(50):
                 max_Appended=True
             try:
                 for tfidf in fake_TFIDF[user]:
-            #print(fake_TFIDF[user])
-            #print(user)
-            #print(tfidf)
-            #print(i)
                     max_tfidf = max(fake_TFIDF[user].values())
                     max_keys = [k for k, v in fake_TFIDF[user].items() if v == max_tfidf]
                     top_50_fake_tfidf[i] = max_keys[0]
@@ -360,42 +283,15 @@ for i in range(50):
             pass
         except AttributeError:
             pass
-    #try:
-    #    if user==list(fake_TFIDF.keys())[-1] and tfidf==list(real_TFIDF[user].keys())[-1]:
-    #        try:
-    #            fake_TFIDF[temp].pop(top_50_fake_tfidf[i])
-    #        except IndexError:
-    #            pass
-    #except AttributeError:
-    #    pass
-#print(top_50_real_tfidf)
 import matplotlib.pyplot as plt
-#print('1')
-#print(top_50_real_tfidf)
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if ele]
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 35]
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 23]
-#top_50_real_tfidf = [ele for ele in top_50_real_tfidf if not (ele == 're')]
 top_50_real_tfidf = [ele for ele in top_50_real_tfidf if not (ele == 'Youve')]
-#top_50_real_tfidf = [ele for ele in top_50_real_tfidf if not (ele == 'Re')]
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 21]
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 5]
 top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 2]
-#print('2')
-#print(top_50_real_tfidf)
-#top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 23]
-#top_50_real_tfidf = [ele for i,ele in enumerate(top_50_real_tfidf) if not i is 35]       
 
-#    if ele == 're':
-#        top_50_real_tfidf = top_50_real_tfidf.remove(ele)
-#    if ele == 'Youve':
-#        top_50_real_tfidf = top_50_real_tfidf.remove(ele)
-#try:
-#    top_50_real_tfidf = top_50_real_tfidf.remove(top_50_real_tfidf[23])
-#    top_50_real_tfidf = top_50_real_tfidf.remove(top_50_real_tfidf[35])
-#except ValueError:
-#    pass
-#convert list to string and generate
 unique_string=(" ").join(top_50_real_tfidf)
 wordcloud = WordCloud(width = 1000, height = 500).generate(unique_string)
 plt.figure(figsize=(15,8))
@@ -404,7 +300,6 @@ plt.axis("off")
 plt.savefig("real_TFIDF_Common_Wordcloud"+".png", bbox_inches='tight')
 
 
-#convert list to string and generate
 unique_string=(" ").join(top_50_fake_tfidf)
 wordcloud = WordCloud(width = 1000, height = 500).generate(unique_string)
 plt.figure(figsize=(15,8))
@@ -416,12 +311,6 @@ with open('fakeTFIDF.pickle', 'wb') as handle:
     pickle.dump(fakeArticlesTFIDF, handle, protocol=pickle.HIGHEST_PROTOCOL)
 with open('realTFIDF.pickle', 'wb') as handle:
     pickle.dump(realArticlesTFIDF, handle, protocol=pickle.HIGHEST_PROTOCOL)
-#print(top_50_real_tfidf)
 for i,art in enumerate(top_50_real_tfidf):
-    #print(type(art))
-    #print(art)
-    print(i)
-    print(type(art))
     test = art.encode('utf-8')
     print(test)
-#print(art.encode('utf-8'))
