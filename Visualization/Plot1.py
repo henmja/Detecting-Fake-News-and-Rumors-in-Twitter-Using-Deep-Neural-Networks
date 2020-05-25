@@ -52,9 +52,7 @@ for user in fakeFlw:
 for user in realFlw:
     if user not in fakeFlw.keys():
         fakeFlw[user] = np.nan
-        #plt.scatter(realUsersTotal.items(),fakeUsersTotal.items())
 
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -115,15 +113,6 @@ for i,user in enumerate(df['id_str_user']):
             fakeFlw[user] = len(temp)
     except KeyError:
         print('record removed')
-#for user in fakeFlw:
-#    if user not in realFlw.keys():
-#        realFlw[user] = np.nan
-#for user in realFlw:
-#    if user not in fakeFlw.keys():
-#        fakeFlw[user] = np.nan
-
-#plt.show()
-
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
 
@@ -237,14 +226,7 @@ for i,user in enumerate(df['id_str_user']):
             fakeFlw[user] = len(temp)
     except KeyError:
         print('record removed')
-#for user in fakeFlw:
-#    if user not in realFlw.keys():
-#        realFlw[user] = np.nan
-#for user in realFlw:
-#    if user not in fakeFlw.keys():
-#        fakeFlw[user] = np.nan
 
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
