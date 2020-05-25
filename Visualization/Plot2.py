@@ -46,9 +46,7 @@ for key in realUsers:
     if key not in fakeUsers.keys():
         fakeUsersTotal[key] = np.nan
 
-#plt.scatter(realUsersTotal.items(),fakeUsersTotal.items())
 
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -106,9 +104,6 @@ for key in realTweets:
     if key not in fakeTweets.keys():
         fakeUsersTotal[key] = np.nan
 
-#plt.scatter(realUsersTotal.items(),fakeUsersTotal.items())
-
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -124,7 +119,7 @@ for key in fakeUsersTotal.keys():
     
 keys = sorted(set(list(realUsersTotal.keys())+list(fakeUsersTotal.keys())))
 
-#add values from set of real and fake to realUsersTotal if 77
+
 d = dict([(y,x+1) for x,y in enumerate(keys)])
 temp = [d[x] for x in realUsersTotal.keys()]
 for i,key in enumerate(temp):
@@ -198,9 +193,6 @@ for key in realRetweets:
         fakeUsersTotal[key] = np.nan
 print(len(realUsersTotal.keys()))
 
-#plt.scatter(realUsersTotal.items(),fakeUsersTotal.items())
-
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -266,30 +258,16 @@ for key in realRetweets:
         fakeUsersTotal[key] = np.nan
 print(len(realUsersTotal.keys()))
 
-#plt.scatter(realUsersTotal.items(),fakeUsersTotal.items())
-
-#plt.show()
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
-#idx = []
-#for item in range(len(realUsersTotal.keys())):
-#    idx.append(item)
-#print(len(idx))
-#items = []
-#fakeItems=[]
-#for key in realUsersTotal.keys():
-#    items.append(realUsersTotal[key])
-#for key in fakeUsersTotal.keys():
-#    fakeItems.append(fakeUsersTotal[key])
+
 print(realRetweets)
 print(fakeRetweets)
 
 x= [item for item in realUsersTotal.values()]
 n = len(x)
 y = np.arange(1, n+1) / n
-#in_hist = [list(in_degrees.values()).count(x) for x in in_values]
-#print(x.shape)
 print(x)
 print(type(x))
 ax1.scatter(x=x, y=y, c='g', label='real')
@@ -298,9 +276,6 @@ x=[item for item in fakeUsersTotal.values()]
 n = len(x)
 y = np.arange(1, n+1) / n
 ax1.scatter(x=x, y=y, c='r', label='fake')
-
-#print(np.array(realUsersTotal.values())[~np.isnan(realUsersTotal.values())].mean())
-#print(np.array(fakeUsersTotal.values())[~np.isnan(fakeUsersTotal.values())].mean())
 ax1.set_xlabel('Retweet Frequency')
 ax1.set_ylabel('Probabilities')
 plt.title("Retweet Frequency CDF", fontsize=17)
