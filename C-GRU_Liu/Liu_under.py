@@ -258,10 +258,11 @@ main_output = Dense(2, activation='sigmoid', name='main_output')(x)
 model = Model(input=[main_input, auxiliary_input], output=[main_output, auxiliary_output])
 
 model.compile(optimizer='rmsprop', loss='binary_crossentropy',loss_weights=[1., 0.2],metrics=[metrics.AUC()])
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 num_Norm_Train = num_Norm_Train.to_numpy()
 #time_series_Mat = time_series_Mat.to_numpy()
 print(time_series_Mat.shape)
-model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=2, batch_size=32)
+model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=2, batch_size=32, callbacks=[es])
 
 print(time_series_Mat_Val.shape)
 print(num_Norm_Val.shape)
