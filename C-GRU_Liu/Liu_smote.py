@@ -261,7 +261,8 @@ model = Model(input=[main_input, auxiliary_input], output=[main_output, auxiliar
 
 model.compile(optimizer='rmsprop', loss='binary_crossentropy',loss_weights=[1., 0.2],metrics=[metrics.AUC()])
 print(time_series_Mat.shape)
-model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=2, batch_size=32)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
+model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=2, batch_size=32, callbacks=[es])
 
 print(time_series_Mat_Val.shape)
 print(num_Norm_Val.shape)
