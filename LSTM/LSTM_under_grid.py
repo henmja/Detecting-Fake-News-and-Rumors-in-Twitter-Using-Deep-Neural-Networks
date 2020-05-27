@@ -277,24 +277,18 @@ print(time_series_val_Mat.shape)
 combined_Val = np.concatenate([features_Val,time_series_val_Mat],axis=1)
 combined_Val = np.concatenate([combined_Val,num_Norm_Val],axis=1)
 
-combined_Val_Resampled, target_Val_Resampled = undersample.fit_resample(combined_Val, target_Val)
-predictions = model.predict(combined_Val_Resampled)
-print(target_Val_Resampled.shape)
+target_Val = np.argmax(target_Val, axis=1)
+
+predictions = model.predict(combined_Val)
 predictions_bool = np.argmax(predictions, axis=1)
 print(predictions_bool.shape)
-print(classification_report(target_Val_Resampled, predictions_bool, digits=3))
-predictions_prob = model.predict_proba(combined_Val_Resampled)
-print(target_Val_Resampled.shape)
-print(predictions_prob.shape)
-target_cat = to_categorical(target_Val_Resampled)
-auc = roc_auc_score(target_cat, predictions_prob)
-print('target_Val_Resampled')
-print(target_Val_Resampled)
-print('target_val')
-print(target_Val)
+print(classification_report(target_Val, predictions_bool,digits=3))
+predictions_prob = model.predict_proba(combined_Val)
+target_Val = to_categorical(target_Val)
+auc = roc_auc_score(target_Val, predictions_prob)
 import sklearn.metrics as metrics
 y_pred = (predictions > 0.5)
-matrix = metrics.confusion_matrix(target_cat.argmax(axis=1), y_pred.argmax(axis=1))
+matrix = metrics.confusion_matrix(target_Val.argmax(axis=1), y_pred.argmax(axis=1))
 micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
 print('micro')
 print(micro)
@@ -303,20 +297,15 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 print('auc')
 print(auc)
-print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
-means = grid_result.cv_results_['mean_test_score']
-stds = grid_result.cv_results_['std_test_score']
-params = grid_result.cv_results_['params']
-for mean, stdev, param in zip(means, stds, params):
-    print("%f (%f) with: %r" % (mean, stdev, param))
-
+import sklearn.metrics as metrics
+y_pred = (predictions > 0.5)
+matrix = metrics.confusion_matrix(target_Val.argmax(axis=1), y_pred.argmax(axis=1))
+print(matrix)
 import matplotlib.pyplot as plt
 #%matplotlib inline
-
 val_Loss = history.history['val_loss']
 loss = history.history['loss']
 epochs = range(1, len(loss)+1)
-
 plt.plot(epochs, loss, label='Training Loss')
 plt.plot(epochs, val_Loss, label='Testing Loss')
 plt.title('Training and Testing Loss')
@@ -324,8 +313,6 @@ plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
 plt.savefig("loss_Function"+".png", bbox_inches='tight')
-
-
 acc = history.history['acc']
 val_Acc = history.history['val_acc']
 plt.plot(epochs, acc, label='Training accuracy')
@@ -335,5 +322,4 @@ plt.ylabel('Accuracy')
 plt.xlabel('Epochs')
 plt.legend()
 plt.savefig("accuracy"+".png", bbox_inches='tight')
-
 print(matrix)
