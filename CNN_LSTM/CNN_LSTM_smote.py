@@ -64,7 +64,7 @@ from sklearn.model_selection import GridSearchCV
 
 #video_indexes = pd.read_pickle('video_indexes.pkl')
 #print(video_indexes)
-df = pd.read_pickle("bigdata_timeseries.pkl")
+df = pd.read_pickle("../Preprocessing/bigdata_timeseries.pkl")
 print('before')
 #df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 #from nltk.stem.snowball import SnowballStemmer
