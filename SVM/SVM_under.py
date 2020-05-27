@@ -217,25 +217,24 @@ target_Val = target_Val.reset_index(drop=True)
 target_Val = target_Val.dropna()
 combined_Val = combined_Val[target_Val.index.values]
 # predict the labels on validation dataset
-combined_Val_Resampled, target_Val_Resampled = undersample.fit_resample(combined_Val, target_Val)
 
 
-predictions_SVM = SVM.predict(combined_Val_Resampled)
+predictions_SVM = SVM.predict(combined_Val)
 print(predictions_SVM)
 print('F1 score')
-print(classification_report(target_Val_Resampled, predictions_SVM,digits=3))
-print(accuracy_score(predictions_SVM, target_Val_Resampled)*100)
+print(classification_report(target_Val, predictions_SVM,digits=3))
+print(accuracy_score(predictions_SVM, target_Val)*100)
 
-predictions_prob = SVM.predict_proba(combined_Val_Resampled)
+predictions_prob = SVM.predict_proba(combined_Val)
 print('target')
-print(target_Val_Resampled.shape)
+print(target_Val.shape)
 print('predictions')
 print(predictions_prob.shape)
 predictions_prob = np.argmax(predictions_prob, axis=1)
-print(target_Val_Resampled.shape)
-auc = roc_auc_score(target_Val_Resampled, predictions_prob)
+print(target_Val.shape)
+auc = roc_auc_score(target_Val, predictions_prob)
 import sklearn.metrics as metrics
-matrix = metrics.confusion_matrix(target_Val_Resampled, predictions_SVM)
+matrix = metrics.confusion_matrix(target_Val, predictions_SVM)
 micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
 print('micro')
 print(micro)
