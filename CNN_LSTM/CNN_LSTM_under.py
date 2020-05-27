@@ -316,7 +316,6 @@ print(time_series_Mat_Val.shape)
 print(num_Norm_Val.shape)
 print(type(time_series_Mat_Val))
 print(type(num_Norm_Val))
-#predictions = model.predict(np.array([[time_series_Mat_Val,num_Norm_Val]]))
 predictions = model.predict([features_Pad_Val,num_Norm_Val])
 from sklearn.metrics import classification_report
 predictions_bool = np.argmax(predictions[0], axis=1)
