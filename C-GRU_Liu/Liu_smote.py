@@ -43,7 +43,7 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 import numpy as np
 
-df = pd.read_pickle("bigdata_timeseries.pkl")
+df = pd.read_pickle("../Preprocessing/bigdata_timeseries.pkl")
 print('before')
 
 df['created_at'] = df['created_at'].astype(str)
