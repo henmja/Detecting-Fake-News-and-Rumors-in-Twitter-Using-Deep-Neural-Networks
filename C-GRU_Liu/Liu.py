@@ -45,21 +45,10 @@ import numpy as np
 
 df = pd.read_pickle("bigdata_timeseries.pkl")
 print('before')
-stemmer = SnowballStemmer("english")
-df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
-print('corrected')
 
 df['created_at'] = df['created_at'].astype(str)
 df['followers'] = df['followers'].astype(str)
 df['following'] = df['following'].astype(str)
-
-cat_Cols = ['text', 'name_user','name_zero_user_mentions_entities', 'location_user', 'description_user', 'contributors_enabled_user', 'default_profile_image_user', 'default_profile_user', 'favorited', 'follow_request_sent_user', 'following_user', 'geo_enabled_user', 'has_extended_profile_user', 'id', 'id_str', 'id_str_user', 'id_str_zero_user_mentions_entities', 'id_user', 'id_zero_user_mentions_entities', 'is_quote_status', 'is_translation_enabled_user', 'is_translator_user', 'lang', 'location_user', 'name_user', 'notifications_user', 'possibly_sensitive', 'possibly_sensitive_appealable', 'profile_background_color_user', 'profile_background_tile_user', 'profile_link_color_user', 'profile_sidebar_border_color_user', 'profile_sidebar_fill_color_user', 'profile_text_color_user', 'profile_use_background_image_user', 'protected_user', 'retweeted', 'screen_name_user', 'screen_name_zero_user_mentions_entities', 'translator_type_user', 'truncated', 'verified_user']
-
-cat_Features =df['text']
-print(str(df['text']).encode('utf-8').decode('latin-1'))
-
-for col in cat_Cols:
-    df[col] = df[col].astype(str)
 
 label = pd.get_dummies(df['label'])
 label = np.array(label)
@@ -87,104 +76,27 @@ num_Norm = pd.DataFrame(x_scaled)
 for col in num_Norm.keys():
     num_Norm[col] = pd.cut(num_Norm[col], bins=3, labels=np.arange(3), right=False)
 
-strings = [] 
-stop_words = set(stopwords.words('english')) 
-
-print(df.shape)
-for i,line in enumerate(tqdm_notebook(cat_Features, total=df.shape[0])): 
-    line = re.sub(r'^https?:\/\/.*[\r\n]*', '', line, flags=re.MULTILINE)
-    line = line.replace("'","")
-    line = line.replace("\[","")
-    line = line.replace(":","")
-    line = line.replace("-","")
-    line = line.replace("_","")
-    line = line.replace("+","")
-    line = line.replace("?","")
-    line = line.replace(",","")
-    line = line.replace("\]","")
-    line = line.replace(".","")
-    line = line.replace("â€˜","")
-    line = line.replace("â€™","")
-    line = line.replace("@","")
-    line = line.replace("!","")
-    line = line.replace("$","")
-    line = line.replace("=","")
-    line = line.replace("(","")
-    line = line.replace(")","")
-    line = line.replace("/","")
-    line = line.replace("\\","")
-    line = line.replace("&","")
-    line = line.replace("#","")
-    line = re.sub('\d', '', line)
-    line = line.split(' ')
-    line = [w for w in line if not w in stop_words]
-    line = str(line)
-    line = str(line.strip())[1:-1].replace(' ', ' ')
-    strings.append(line)
-
-#encode text as numbers
-tok_Len = 100000 # max number of words for tokenizer
-tokenizer = Tokenizer(num_words=tok_Len)
-tokenizer.fit_on_texts(strings)
-sequences = tokenizer.texts_to_sequences(strings)
-term_Index = tokenizer.word_index
-print('Number of Terms:', len(term_Index))
-
-
-sen_Len = 98 # max length of each sentences, including padding
-tok_Features = pad_sequences(sequences, padding = 'post', maxlen = sen_Len)
-print('Shape of tokenized features tensor:', tok_Features.shape)
-
-indices = np.arange(tok_Features.shape[0])
+indices = np.arange(num_Norm.shape[0])
 np.random.shuffle(indices)
 time_series = df['created_at_retweets']
 time_series.reset_index(drop=True, inplace=True)
 
 time_series = time_series[indices]
-tok_Features = tok_Features[indices]
 labels = label[indices]
 
 test_Perc = 0.2 #20% data used for testing
-num_validation_samples = int(test_Perc*tok_Features.shape[0])
-features_Train = tok_Features[: -num_validation_samples]
+num_validation_samples = int(test_Perc*num_Norm.shape[0])
 time_series_Train = time_series[: -num_validation_samples]
 num_Norm_Train = num_Norm[: -num_validation_samples]
 target_Train = labels[: -num_validation_samples]
-features_Val = tok_Features[-num_validation_samples: ]
 
 num_Norm_Val = num_Norm[-num_validation_samples: ]
 num_Norm_Val = num_Norm_Val.to_numpy()
-print('NUM NORM VAL')
-print(num_Norm_Val)
 time_series_Val = time_series[-num_validation_samples: ]
-print(time_series_Train.shape)
-print('TIME SERIES VAL')
-print(time_series_Val)
-print(time_series_Val.shape)
 target_Val = labels[-num_validation_samples: ]
 print('Number of records in each attribute:')
 print('training: ', target_Train.sum(axis=0))
 print('validation: ', target_Val.sum(axis=0))
-
-
-emb_Dim = 100 # embedding dimensions for word vectors
-glove = 'glove.6B.'+str(emb_Dim)+'d.txt'
-emb_Ind = {}
-f = open(glove, encoding='utf8')
-print('Loading Glove \n')
-for line in f:
-    values = line.split()
-    term = values[0]
-    emb_Ind[term] = np.asarray(values[1:], dtype='float32')
-f.close()
-print("Done---\nMap terms to embedding---")
-
-emb_Mat = np.random.random((len(term_Index) + 1, emb_Dim))
-for term, i in term_Index.items():
-    emb_Vec = emb_Ind.get(term)
-    if emb_Vec is not None:
-        emb_Mat[i] = emb_Vec
-print("Done")
 
 maxLen = 0
 maxIndex = 0
@@ -285,46 +197,3 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 
 print(classification_report(target_Val.argmax(axis=1), predictions_bool,digits=3))
-predictions_prob = model.predict_proba([time_series_Mat_Val,num_Norm_Val])
-auc = roc_auc_score(target_Val, predictions_prob)
-print('auc')
-print(auc)
-import matplotlib.pyplot as plt
-#%matplotlib inline
-
-val_Loss = history.history['val_loss']
-loss = history.history['loss']
-epochs = range(1, len(loss)+1)
-
-plt.plot(epochs, loss, label='Training Loss')
-plt.plot(epochs, val_Loss, label='Testing Loss')
-plt.title('Training and Testing Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.savefig("loss_Function"+".png", bbox_inches='tight')
-
-
-acc = history.history['acc']
-val_Acc = history.history['val_acc']
-plt.plot(epochs, acc, label='Training accuracy')
-plt.plot(epochs, val_Acc, label='Testing Accuracy')
-plt.title('Training and Testing Accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epochs')
-plt.legend()
-plt.savefig("accuracy"+".png", bbox_inches='tight')
-
-print(matrix)
-micro = (matrix[0,0]+matrix[1,1])/(matrix[0,0]+matrix[1,1]+matrix[0,1]+matrix[1,0])
-print('micro')
-print(micro)
-print('macro')
-macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1,0]))/2
-print(macro)
-predictions_prob = model.predict_proba([time_series_Mat_Val,num_Norm_Val])
-print(classification_report(target_Val, predictions_prob,digits=3))
-target_Val = np.argmax(target_Val, axis=1)
-auc = roc_auc_score(target_Val, predictions_bool)
-print('auc')
-print(auc)
