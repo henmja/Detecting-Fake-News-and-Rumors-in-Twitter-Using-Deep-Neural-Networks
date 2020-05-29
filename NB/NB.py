@@ -129,20 +129,12 @@ indices = np.arange(tok_Features.shape[0])
 np.random.shuffle(indices)
 time_series = df['created_at_retweets']
 time_series.reset_index(drop=True, inplace=True)
-print('before')
-for i,time in enumerate(time_series):
-    if isinstance(time,float):
-        print(i)
-        print(time)
-print('etter')
+
 print(type(time_series))
 time_series = time_series[indices]
 print('before2')
 print(time_series)
-for i,time in enumerate(time_series):
-    print(i)
-    print(type(time))
-    print('etter2')
+
 tok_Features = tok_Features[indices]
 labels = label[indices]
 
