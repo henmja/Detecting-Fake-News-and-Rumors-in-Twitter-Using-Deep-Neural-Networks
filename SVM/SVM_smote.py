@@ -247,29 +247,3 @@ print(auc)
 
 import matplotlib.pyplot as plt
 #%matplotlib inline
-
-val_Loss = history.history['val_loss']
-loss = history.history['loss']
-epochs = range(1, len(loss)+1)
-
-plt.plot(epochs, loss, label='Training Loss')
-plt.plot(epochs, val_Loss, label='Testing Loss')
-plt.title('Training and Testing Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.savefig("loss_Function"+".png", bbox_inches='tight')
-
-
-acc = history.history['acc']
-val_Acc = history.history['val_acc']
-plt.plot(epochs, acc, label='Training accuracy')
-plt.plot(epochs, val_Acc, label='Testing Accuracy')
-plt.title('Training and Testing Accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epochs')
-plt.legend()
-plt.savefig("accuracy"+".png", bbox_inches='tight')
-
-print(matrix)
-
