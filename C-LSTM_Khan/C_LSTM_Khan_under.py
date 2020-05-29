@@ -41,6 +41,7 @@ import numpy as np
 from imblearn.under_sampling import RandomUnderSampler
 
 df = pd.read_pickle("bigdata_timeseries.pkl")
+df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 stemmer = SnowballStemmer("english")
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
