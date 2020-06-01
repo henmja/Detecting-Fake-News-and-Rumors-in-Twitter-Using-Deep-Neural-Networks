@@ -1,3 +1,4 @@
+https://machinelearningmastery.com/how-to-code-the-students-t-test-from-scratch-in-python/
 https://www.datacamp.com/community/tutorials/probability-distributions-python \
 https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_pickle.html \
 https://pandas.pydata.org/pandas-docs/version/0.23.3/generated/pandas.DataFrame.to_pickle.html \
