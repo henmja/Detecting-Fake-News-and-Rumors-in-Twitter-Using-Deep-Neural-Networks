@@ -306,7 +306,7 @@ def create_model():
 #print(e.shape)
 #print(type(e))
     model.add(e)
-    model.add(Conv1D(128, 5, activation='relu'))
+    #model.add(Conv1D(128, 5, activation='relu'))
 #    model.add(Bidirectional(LSTM(60, return_sequences=True)))
     model.add(Bidirectional(LSTM(60, return_sequences=True)))
 #model.add(GlobalMaxPool1D())
