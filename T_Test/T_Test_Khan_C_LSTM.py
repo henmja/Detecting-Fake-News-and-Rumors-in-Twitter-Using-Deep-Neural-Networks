@@ -1,6 +1,5 @@
 #coding: utf-8
 import json
-import pickle
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score
 from langdetect import detect  #detects what language is written
@@ -8,6 +7,8 @@ from  tqdm import tqdm
 import nltk
 nltk.download('stopwords')
 from keras.layers import Bidirectional
+from keras.layers import Conv1D
+from keras.layers.convolutional import MaxPooling1D
 import nltk
 import re
 from tqdm import tqdm_notebook
@@ -22,25 +23,28 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Flatten
 from keras.layers import Embedding
-from keras.layers import LSTM
-from keras.layers import Bidirectional
 from keras.callbacks import EarlyStopping
 from nltk.stem.snowball import SnowballStemmer
 from textblob import TextBlob
 from keras.layers import GlobalMaxPool1D
 from keras.layers import Dropout
 from keras.layers import InputLayer
+from keras.layers import Dense, Embedding, Dropout, LSTM
+from keras.models import Sequential
+from keras.layers import Bidirectional
+from keras.layers.convolutional import Conv1D
+from keras.layers.convolutional import MaxPooling1D
 import pandas as pd
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 import numpy as np
 
-df = pd.read_pickle("bigdata_timeseries.pkl")
-print('before')
-#df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
+df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
+df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 stemmer = SnowballStemmer("english")
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
+
 df['created_at'] = df['created_at'].astype(str)
 df['followers'] = df['followers'].astype(str)
 df['following'] = df['following'].astype(str)
@@ -50,7 +54,6 @@ cat_Cols = ['text', 'name_user','name_zero_user_mentions_entities', 'location_us
 
 cat_Features =df['text']
 print(str(df['text']).encode('utf-8').decode('latin-1'))
-
 for col in cat_Cols:
     df[col] = df[col].astype(str)
 
@@ -59,7 +62,6 @@ label = np.array(label)
 
 strings = [] 
 stop_words = set(stopwords.words('english')) 
-
 print(df.shape)
 for i,line in enumerate(tqdm_notebook(cat_Features, total=df.shape[0])): 
     line = re.sub(r'^https?:\/\/.*[\r\n]*', '', line, flags=re.MULTILINE)
@@ -99,7 +101,6 @@ tokenizer.fit_on_texts(strings)
 sequences = tokenizer.texts_to_sequences(strings)
 term_Index = tokenizer.word_index
 print('Number of Terms:', len(term_Index))
-
 
 sen_Len = 300 # max length of each sentences, including padding
 tok_Features = pad_sequences(sequences, padding = 'post', maxlen = sen_Len)
@@ -148,24 +149,27 @@ for k in range(100):
     model.add(InputLayer((sen_Len,),dtype='int32'))
     e = Embedding(len(term_Index) + 1, emb_Dim, weights=[emb_Mat], input_length=sen_Len, trainable=False)
     model.add(e)
-    model.add(Bidirectional(LSTM(100, return_sequences=False)))
-    model.add(Dense(50, activation='relu'))
+    model.add(Conv1D(128, 3, activation='relu'))
+    model.add(MaxPooling1D(pool_size=2))
+    model.add(Bidirectional(LSTM(300, return_sequences=False)))
+    model.add(Dense(100, activation='relu'))
+    model.add(Dropout(0.2))
+    #prevents blowing up activation
     model.add(Dense(2, activation='sigmoid'))
+
+
 
     opt = keras.optimizers.Adam(learning_rate=0.001)
     model.compile(optimizer=opt, loss='binary_crossentropy', metrics = ['acc'])
-    es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 
 
-    history = model.fit(features_Train, target_Train, epochs = 2, batch_size=32, validation_split=0.20,callbacks=[es])
+    history = model.fit(features_Train, target_Train, epochs = 10, batch_size=64, validation_split=0.20)
 
     predictions = model.predict(features_Val)
     from sklearn.metrics import classification_report
-    predictions_bool = np.argmax(predictions, axis=1)
     predictions_prob = model.predict_proba(features_Val)
-    auc = roc_auc_score(target_Val, predictions_prob) 
-    #target_Val = np.argmax(target_Val, axis=1)
-    print(classification_report(np.argmax(target_Val,axis=1), predictions_bool,digits=3))
+    auc = roc_auc_score(target_Val, predictions_prob)
+    print(classification_report(target_Val, np.argmax(predictions,axis=1),digits=3))
     import sklearn.metrics as metrics
     y_pred = (predictions > 0.5)
     matrix = metrics.confusion_matrix(np.argmax(target_Val,axis=1), y_pred.argmax(axis=1))
@@ -205,6 +209,6 @@ for k in range(100):
     print(macro)
     print('auc')
     print(auc)
-
-with open('Khan_C_LSTM_accuracies.pkl','wb') as f:
+    
+    with open('Khan_C_LSTM_accuracies.pkl','wb') as f:
     pickle.dump(accuracies, f)
