@@ -83,4 +83,4 @@ for i,time in enumerate(df['created_at_retweets']):
     if i<500:
         print(time)
 import pickle
-df.to_pickle('bigdata_timeseries.pkl')
+df.to_pickle('bigdata_preprocessed.pkl')
