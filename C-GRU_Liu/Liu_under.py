@@ -44,7 +44,7 @@ pd.set_option('display.width', 1000)
 import numpy as np
 
 from imblearn.under_sampling import RandomUnderSampler
-df = pd.read_pickle("../Preprocessing/bigdata_timeseries.pkl")
+df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
 print('corrected')
 df['created_at'] = df['created_at'].astype(str)
 df['followers'] = df['followers'].astype(str)
