@@ -35,7 +35,7 @@ pd.set_option('display.width', 1000)
 import numpy as np
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
-df = pd.read_pickle("../Preprocessing/bigdata_timeseries.pkl")
+df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
 df['created_at'] = df['created_at'].astype(str)
 df['followers'] = df['followers'].astype(str)
 df['following'] = df['following'].astype(str)
