@@ -224,8 +224,8 @@ def create_model():
 
 gridmodel = KerasClassifier(build_fn=create_model,epochs=10, batch_size=5, verbose=0)
 
-batch_size = [10, 20, 40, 60, 80, 100]
-epochs = [10, 50, 100]
+batch_size = [8,16,32,64,128]
+epochs = [1,2,3,4,5]
 param_grid = dict(batch_size=batch_size, epochs=epochs)
 grid = GridSearchCV(estimator=gridmodel, param_grid=param_grid, n_jobs=-1, cv=3)
 grid_result = grid.fit(features_Train_Resampled, target_Train_Resampled)
