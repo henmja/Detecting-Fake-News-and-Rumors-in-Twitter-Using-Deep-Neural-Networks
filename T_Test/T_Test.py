@@ -13,8 +13,8 @@ from numpy.random import seed
 from numpy.random import randn
 from numpy import mean
 BiLSTM_Accuracies = np.mean(BiLSTM_Accuracies,axis=1)
-C_LSTM_Accuracies = np.mean(C-LSTM_Accuracies,axis=1)
-C-LSTM_Accuracies = np.mean(C_LSTM_Accuracies,axis=1)
+C_LSTM_Accuracies = np.mean(C_LSTM_Accuracies,axis=1)
+C-LSTM_Accuracies = np.mean(C-LSTM_Accuracies,axis=1)
 CNN_Accuracies = np.mean(CNN_Accuracies,axis=1)
 Khan_LSTM_Accuracies = np.mean(Khan_LSTM_Accuracies,axis=1)
 Khan_C_LSTM_Accuracies = np.mean(Khan_C_LSTM_Accuracies,axis=1)
