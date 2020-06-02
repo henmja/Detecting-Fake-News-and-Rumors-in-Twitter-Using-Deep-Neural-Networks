@@ -161,6 +161,9 @@ predictions = model.predict(features_Val)
 from sklearn.metrics import classification_report
 predictions_bool = np.argmax(predictions, axis=1)
 predictions_prob = model.predict_proba(features_Val)
+import pickle
+with open('../T_Test/Khan_BiLSTM_accuracies.pkl','wb') as f:
+    pickle.dump(predictions_prob, f)
 auc = roc_auc_score(target_Val, predictions_prob) 
 target_Val = np.argmax(target_Val, axis=1)
 print(classification_report(target_Val, predictions_bool,digits=3))
