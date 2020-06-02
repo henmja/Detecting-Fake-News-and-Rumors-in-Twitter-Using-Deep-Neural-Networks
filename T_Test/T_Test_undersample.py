@@ -1,7 +1,7 @@
 import pandas as pd
 
 BiLSTM_Accuracies = pd.read_pickle('BiLSTM_under_accuracies.pkl')
-C-LSTM_Accuracies = pd.read_pickle('C_LSTM_under_accuracies.pkl')
+C-LSTM_Accuracies = pd.read_pickle('C-LSTM_under_accuracies.pkl')
 C_LSTM_Accuracies = pd.read_pickle('C_LSTM_under_accuracies.pkl') 
 CNN_Accuracies = pd.read_pickle('CNN_under.pkl')
 Khan_C_LSTM_Accuracies = pd.read_pickle('Khan_C_LSTM_under_accuracies.pkl')
