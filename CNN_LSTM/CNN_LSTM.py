@@ -328,6 +328,9 @@ matrix = metrics.confusion_matrix(target_Val.argmax(axis=1), predictions[0].argm
 
 print('predictions')
 print(predictions[0])
+import pickle
+with open('../T_Test/C_LSTM_accuracies.pkl','wb') as f:
+    pickle.dump(predictions[0], f)
 print(predictions[0].argmax(axis=1))
 print('y_pred')
 print(y_pred[0])
@@ -341,10 +344,3 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 
 print(classification_report(target_Val.argmax(axis=1), predictions_bool,digits=3))
-
-
-y_classes = predictions.argmax(axis=-1)
-print(y_classes)
-import pickle
-with open('../T_Test/C_LSTM_accuracies.pkl','wb') as f:
-    pickle.dump(predictions_prob, f)
