@@ -24,7 +24,6 @@ from keras.layers import Flatten
 from keras.layers import Embedding
 from keras.layers import LSTM
 from keras.layers import Bidirectional
-from keras.layers import Conv1D
 from keras.layers import GlobalMaxPool1D
 from keras.layers import Dropout
 from keras.layers import InputLayer
@@ -214,7 +213,6 @@ def create_model():
     print('TERM INDEX')
     print(len(term_Index))
     model.add(e)
-    model.add(Conv1D(128, 5, activation='relu'))
     model.add(Bidirectional(LSTM(60, return_sequences=True)))
     model.add(GlobalMaxPool1D())
     model.add(Dropout(0.1))
@@ -253,7 +251,6 @@ print(sen_Len)
 print('TERM INDEX')
 print(len(term_Index))
 model.add(e)
-model.add(Conv1D(128, 5, activation='relu'))
 model.add(Bidirectional(LSTM(60, return_sequences=True)))
 model.add(GlobalMaxPool1D())
 model.add(Dropout(0.1))
