@@ -1,6 +1,7 @@
 import pandas as pd
 
 BiLSTM_Accuracies = pd.read_pickle('BiLSTM_under_accuracies.pkl')
+C-LSTM_Accuracies = pd.read_pickle('C_LSTM_under_accuracies.pkl')
 C_LSTM_Accuracies = pd.read_pickle('C_LSTM_under_accuracies.pkl') 
 CNN_Accuracies = pd.read_pickle('CNN_under.pkl')
 Khan_C_LSTM_Accuracies = pd.read_pickle('Khan_C_LSTM_under_accuracies.pkl')
@@ -12,10 +13,12 @@ from numpy.random import seed
 from numpy.random import randn
 from numpy import mean
 BiLSTM_Accuracies = np.mean(BiLSTM_Accuracies,axis=1)
+C-LSTM_Accuracies = np.mean(C-LSTM_Accuracies,axis=1)
 C_LSTM_Accuracies = np.mean(C_LSTM_Accuracies,axis=1)
 CNN_Accuracies = np.mean(CNN_Accuracies,axis=1)
 Khan_C_LSTM_Accuracies = np.mean(Khan_C_LSTM_Accuracies,axis=1)
 print(BiLSTM_Accuracies)
+print(C-LSTM_Accuracies)
 print(C_LSTM_Accuracies)
 print(CNN_Accuracies)
 print(SVM_Accuracies)
@@ -72,6 +75,26 @@ else:
     print(p)
     print('Reject the null hypothesis that the means are equal.')
 
+t_stat, df, cv, p = independent_ttest(C-LSTM_Accuracies, BiLSTM_Accuracies, alpha)
+
+print('t=%.3f, df=%d, cv=%.3f, p=%.3f' % (t_stat, df, cv, p))
+# interpret via critical value
+if abs(t_stat) <= cv:
+    print(abs(t_stat))
+    print(cv)
+    print('Accept null hypothesis that the means are equal.')
+else:
+    print(t_stat)
+    print(cv)
+    print('Reject the null hypothesis that the means are equal.')
+# interpret via p-value
+if p > alpha:
+    print(p)
+    print('Accept null hypothesis that the means are equal.')
+else:
+    print(p)
+    print('Reject the null hypothesis that the means are equal.')
+	
 t_stat, df, cv, p = independent_ttest(CNN_Accuracies, BiLSTM_Accuracies, alpha)
 
 print('t=%.3f, df=%d, cv=%.3f, p=%.3f' % (t_stat, df, cv, p))
