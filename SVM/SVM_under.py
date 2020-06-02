@@ -248,3 +248,7 @@ print(matrix)
 
 import matplotlib.pyplot as plt
 #%matplotlib inline
+
+import pickle
+with open('../T_Test/SVM_under_accuracies.pkl','wb') as f:
+    pickle.dump(predictions_prob, f)
