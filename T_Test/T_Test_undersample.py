@@ -131,11 +131,3 @@ if p > alpha:
 else:
     print(p)
     print('Reject the null hypothesis that the means are equal.')
-
-# interpret via p-value
-#if p > alpha:
-#    print(p)
-#    print('Accept null hypothesis that the means are equal.')
-#else:
-#    print(p)
-#    print('Reject the null hypothesis that the means are equal.')
