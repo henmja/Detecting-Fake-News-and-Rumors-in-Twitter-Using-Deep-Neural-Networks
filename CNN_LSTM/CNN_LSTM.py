@@ -341,3 +341,10 @@ macro = (matrix[0,0]/(matrix[0,0]+matrix[1,0])+matrix[1,1]/(matrix[1,1]+matrix[1
 print(macro)
 
 print(classification_report(target_Val.argmax(axis=1), predictions_bool,digits=3))
+
+
+y_classes = predictions.argmax(axis=-1)
+print(y_classes)
+import pickle
+with open('../T_Test/C_LSTM_accuracies.pkl','wb') as f:
+    pickle.dump(predictions_prob, f)
