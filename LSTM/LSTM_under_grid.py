@@ -284,6 +284,9 @@ predictions_bool = np.argmax(predictions, axis=1)
 print(predictions_bool.shape)
 print(classification_report(target_Val, predictions_bool,digits=3))
 predictions_prob = model.predict_proba(combined_Val)
+import pickle
+with open('../T_Test/BiLSTM_under_accuracies.pkl','wb') as f:
+    pickle.dump(predictions_prob, f)
 target_Val = to_categorical(target_Val)
 auc = roc_auc_score(target_Val, predictions_prob)
 import sklearn.metrics as metrics
