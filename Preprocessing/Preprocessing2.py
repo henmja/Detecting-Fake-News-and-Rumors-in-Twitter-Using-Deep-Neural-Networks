@@ -1,7 +1,7 @@
 import pickle
 import pandas as pd
-fakeArticlesPD = pd.read_pickle("../Visualization/fakePD.pkl")
-realArticlesPD = pd.read_pickle("../Visualization/realPD.pkl")
+fakeArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakePD.pkl")
+realArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realPD.pkl")
 
 print(realArticlesPD)
 #change name of text to user_text
