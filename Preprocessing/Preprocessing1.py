@@ -216,26 +216,26 @@ with open('tweets_per_article.pkl', 'wb') as f:
 with open('records_per_article.pkl', 'wb') as f:
     pickle.dump(records_per_article, f)
 
-with open('../Visualization/fakeUsers.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/fakeUsers.pickle', 'wb') as handle:
     pickle.dump(fakeUsers, handle, protocol=pickle.HIGHEST_PROTOCOL)
-with open('../Visualization/realUsers.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realUsers.pickle', 'wb') as handle:
     pickle.dump(realUsers, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-with open('../Visualization/fakeRetweets.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/fakeRetweets.pickle', 'wb') as handle:
     pickle.dump(fakeRetweets, handle, protocol=pickle.HIGHEST_PROTOCOL)
-with open('../Visualization/realRetweets.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realRetweets.pickle', 'wb') as handle:
     pickle.dump(realRetweets, handle, protocol=pickle.HIGHEST_PROTOCOL)
     
     
-with open('../Visualization/fakeTweets.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/fakeTweets.pickle', 'wb') as handle:
     pickle.dump(fakeTweets, handle, protocol=pickle.HIGHEST_PROTOCOL)
-with open('../Visualization/realTweets.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realTweets.pickle', 'wb') as handle:
     pickle.dump(realTweets, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-fakeArticlesPD.to_pickle("../Visualization/fakePD.pkl")
-realArticlesPD.to_pickle("../Visualization/realPD.pkl")
+fakeArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakePD.pkl")
+realArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realPD.pkl")
 
 
 
