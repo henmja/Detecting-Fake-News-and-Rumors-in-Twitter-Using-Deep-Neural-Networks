@@ -480,8 +480,8 @@ fakeArticlesPD['label'] = 'fake'
 
 
 
-fakeArticlesPD.to_pickle("../Visualization/fakeArticlesPD_2.pkl")
-realArticlesDict = realArticlesPD.to_dict('realArticlesDict')
-with open('../Visualization/realArticlesDict.pickle', 'wb') as handle:
+fakeArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD_2.pkl")
+realArticlesDict = realArticlesPD.to_dict('/local/home/henrikm/Fakenews_Classification/Preprocessing/realArticlesDict')
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesDict.pickle', 'wb') as handle:
         pickle.dump(realArticlesDict, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
