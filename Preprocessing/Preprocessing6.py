@@ -1,5 +1,5 @@
 import pandas as pd
-bigdata = pd.read_pickle('dummy.pkl')
+bigdata = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy.pkl')
 print(bigdata.keys())
 exploded = bigdata.urls_description_entities_user.apply(pd.Series)
 exploded.columns = [str(col) + '_urls_description_entities_user' for col in exploded.columns]
@@ -41,8 +41,8 @@ exploded = bigdata.symbols_entities.apply(pd.Series)
 exploded.columns = [str(col) + '_symbols_entities' for col in exploded.columns]
 bigdata = pd.concat([bigdata.drop(columns='symbols_entities'), exploded], axis=1)
 
-user_followers = pd.read_pickle('dummy_followers.pkl')
-user_following = pd.read_pickle('dummy_following.pkl')
+user_followers = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy_followers.pkl')
+user_following = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy_following.pkl')
 user_followers.user_id = user_followers.user_id.astype(str)
 user_following.user_id = user_following.user_id.astype(str)
 user_followers = user_followers.rename(columns={'user_id': 'id_str_user'})
@@ -58,17 +58,17 @@ bigdata = bigdata.rename(columns={'followers_y': 'following'})
 df1 = bigdata.pop('label') # remove column b and store it in df1
 bigdata['label']=df1 # add b series as a 'new' column.
 
-bigdata.to_pickle("bigdata.pkl")
+bigdata.to_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata.pkl")
 
 import pandas as pd
-bigdata = pd.read_pickle("bigdata.pkl")
+bigdata = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata.pkl")
 
 #drop zero non-null columns:
 bigdata = bigdata.dropna(axis = 1, how = 'all')
 
 #drop rows with less than 63 non-NAN values:
 bigdata = bigdata.dropna(thresh=7) #t = 0 gives 1594 entries, t = 5 gives 1592 entries, t=10 gives 793 entries
-bigdata.to_pickle("bigdata.pkl")
+bigdata.to_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata.pkl")
 
 
 

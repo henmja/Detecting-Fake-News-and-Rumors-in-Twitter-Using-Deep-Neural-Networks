@@ -22,6 +22,6 @@ for i in range(2):
             user_following = user_following.append(data, ignore_index = True)
 
             
-user_followers.to_pickle("dummy_followers.pkl")
-user_following.to_pickle("dummy_following.pkl")
+user_followers.to_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy_followers.pkl")
+user_following.to_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy_following.pkl")
 

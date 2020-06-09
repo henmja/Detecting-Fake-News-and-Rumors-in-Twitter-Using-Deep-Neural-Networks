@@ -1,7 +1,7 @@
 import pickle
 import pandas as pd
-fakeArticlesPD = pd.read_pickle("../Visualization/fakeArticlesPD_3.pkl")
-realArticlesPD = pd.read_pickle("../Visualization/realArticlesPD_3.pkl")
+fakeArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD_3.pkl")
+realArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesPD_3.pkl")
 #combine PDs
 bigdata = realArticlesPD.append(fakeArticlesPD, ignore_index=True)
 
@@ -14,5 +14,5 @@ bigdata = bigdata.dropna(thresh=7) #t = 0 gives 1594 entries, t = 5 gives 1592 e
 #display head
 bigdata.head()
 
-bigdata.to_pickle("dummy.pkl")
+bigdata.to_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/dummy.pkl")
 

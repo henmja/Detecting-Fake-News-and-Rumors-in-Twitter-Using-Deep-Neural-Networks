@@ -1,9 +1,9 @@
 import pickle
 import pandas as pd
-fakeArticlesPD = pd.read_pickle("../Visualization/fakePD.pkl")
-realArticlesPD = pd.read_pickle("../Visualization/realPD.pkl")
+fakeArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakePD.pkl")
+realArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realPD.pkl")
 
-print(realArticlesPD)
+#print(realArticlesPD)
 #change name of text to user_text
 temp = realArticlesPD.columns.values; 
 temp[realArticlesPD.columns.get_loc('text')] = 'title_text';
@@ -480,7 +480,8 @@ fakeArticlesPD['label'] = 'fake'
 
 
 
-fakeArticlesPD.to_pickle("../Visualization/fakeArticlesPD_2.pkl")
+fakeArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD_2.pkl")
 realArticlesDict = realArticlesPD.to_dict('realArticlesDict')
-with open('../Visualization/realArticlesDict.pickle', 'wb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesDict.pickle', 'wb') as handle:
         pickle.dump(realArticlesDict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+

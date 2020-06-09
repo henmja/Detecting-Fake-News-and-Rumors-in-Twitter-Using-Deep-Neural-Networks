@@ -4,7 +4,7 @@ from nltk.corpus import wordnet
 import pandas as pd
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
-bigdataPKL = pd.read_pickle("bigdata.pkl")
+bigdataPKL = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata.pkl")
 print('check1')
 #remove nan columns by threshold
 bigdataPKL = bigdataPKL.dropna(axis = 1, thresh=98)
@@ -32,8 +32,10 @@ try:
         bigdataPKL['following'][row] = bigdataPKL['following'][row].strip('][')
     for row in bigdataPKL['followers'].keys():
         bigdataPKL['followers'][row] = bigdataPKL['followers'][row].strip('][')
+except IndexError:
+    pass
 except ValueError:
     pass
 
-bigdataPKL.to_pickle('bigdataClean.pkl')
+bigdataPKL.to_pickle('/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdataClean.pkl')
 

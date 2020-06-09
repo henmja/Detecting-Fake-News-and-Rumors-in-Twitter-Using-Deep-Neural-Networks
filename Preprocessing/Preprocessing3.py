@@ -2,17 +2,17 @@ import glob
 import os
 import pickle
 import pandas as pd
-fakeArticlesPD = pd.read_pickle("../Visualization/fakeArticlesPD_2.pkl")
+fakeArticlesPD = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD_2.pkl")
 video_indexes = []
 video_indexes_tfidf = []
 video_index = 0
 video_index_tfidf = 0
 idx = 0
-with open('../Visualization/realArticlesDict.pickle', 'rb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesDict.pickle', 'rb') as handle:
     realArticlesPD = pickle.load(handle)
 realArticlesPD = pd.DataFrame(realArticlesPD)
 
-with open('records_per_article.pkl', 'rb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/Preprocessing/records_per_article.pkl', 'rb') as f:
     records_per_article = pickle.load(f)
 print(realArticlesPD.keys())    
 
@@ -83,13 +83,13 @@ realArticlesPD['text'] = realTexts
 
 
 import pickle
-with open('video_indexes.pkl', 'wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/Preprocessing/video_indexes.pkl', 'wb') as f:
     pickle.dump(video_indexes, f)
-with open('video_indexes_tfidf.pkl', 'wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/Preprocessing/video_indexes_tfidf.pkl', 'wb') as f:
     pickle.dump(video_indexes_tfidf, f)
-fakePD.to_pickle("../Visualization/fakeArticlesPD.pkl")
-realPD.to_pickle("../Visualization/realArticlesPD.pkl")
-fakeArticlesPD.to_pickle("../Visualization/fakeArticlesPD_3.pkl")
-realArticlesPD.to_pickle("../Visualization/realArticlesPD_3.pkl")
+fakePD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD.pkl")
+realPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesPD.pkl")
+fakeArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD_3.pkl")
+realArticlesPD.to_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesPD_3.pkl")
 
 
