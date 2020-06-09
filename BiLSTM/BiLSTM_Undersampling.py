@@ -230,7 +230,7 @@ epochs = [1,2,3,4,5]
 param_grid = dict(batch_size=batch_size, epochs=epochs)
 grid = GridSearchCV(estimator=gridmodel, param_grid=param_grid, n_jobs=-1, cv=3)
 grid_result = grid.fit(features_Train_Resampled, target_Train_Resampled)
- summarize results
+#summarize results
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
