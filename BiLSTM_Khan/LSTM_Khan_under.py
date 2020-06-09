@@ -35,9 +35,9 @@ pd.set_option('display.width', 1000)
 import numpy as np
 from imblearn.under_sampling import RandomUnderSampler
 
-df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
+df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
 print('before')
-df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
+#df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 stemmer = SnowballStemmer("english")
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
@@ -120,7 +120,7 @@ print('training: ', target_Train.sum(axis=0))
 print('validation: ', target_Val.sum(axis=0))
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = 'glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
