@@ -1,32 +1,31 @@
 import pandas as pd
 import numpy as np
 try:
-    BiLSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/BiLSTM_accuracies.pkl')
+    BiLSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/BiLSTM_under_accuracies.pkl')
     BiLSTM_Accuracies = np.mean(BiLSTM_Accuracies,axis=1)
 except FileNotFoundError:
     pass
 try:
-    C_LSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/C-LSTM_accuracies.pkl')
+    C_LSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/C-LSTM_under_accuracies.pkl')
     C_LSTM_Accuracies = np.mean(C_LSTM_Accuracies,axis=1)
 except FileNotFoundError:
     pass
 try:
-    C_LSTM_Func_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_LSTM_accuracies.pkl') 
+    C_LSTM_Func_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_LSTM_under_accuracies.pkl') 
     C_LSTM_Func_Accuracies = np.mean(C_LSTM_Func_Accuracies,axis=1)
 except FileNotFoundError:
     pass
 try:
-    CNN_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_accuracies.pkl')
+    CNN_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_under.pkl')
     CNN_Accuracies = np.mean(CNN_Accuracies,axis=1) 
 except FileNotFoundError:
     pass
 try:
-    Khan_LSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_BiLSTM_accuracies.pkl')
-    Khan_LSTM_Accuracies = np.mean(Khan_LSTM_Accuracies,axis=1)
+    SVM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/SVM_under_accuracies.pkl')
 except FileNotFoundError:
     pass
 try:
-    Khan_C_LSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_C_LSTM_accuracies.pkl')
+    Khan_C_LSTM_Accuracies = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_C_LSTM_under_accuracies.pkl')
     Khan_C_LSTM_Accuracies = np.mean(Khan_C_LSTM_Accuracies,axis=1)
 except FileNotFoundError:
     pass
@@ -133,10 +132,10 @@ try:
 except NameError:
     pass
 try:
-    t_stat, df, cv, p = independent_ttest(Khan_LSTM_Accuracies, BiLSTM_Accuracies, alpha)
-    print('T-test for BiLSTM (Khan) and BiLSTM')
+    t_stat, df, cv, p = independent_ttest(Khan_C_LSTM_Accuracies, BiLSTM_Accuracies, alpha)
+    print('T-test for C-LSTM (Khan) and BiLSTM')
     print('t=%.3f, df=%d, cv=%.3f, p=%.3f' % (t_stat, df, cv, p))
-    # interpret via critical value
+# interpret via critical value
     if abs(t_stat) <= cv:
         print(abs(t_stat))
         print(cv)
@@ -145,7 +144,7 @@ try:
         print(t_stat)
         print(cv)
         print('Reject the null hypothesis that the means are equal.')
-    # interpret via p-value
+# interpret via p-value
     if p > alpha:
         print(p)
         print('Accept null hypothesis that the means are equal.')
@@ -155,8 +154,8 @@ try:
 except NameError:
     pass
 try:
-    t_stat, df, cv, p = independent_ttest(Khan_C_LSTM_Accuracies, BiLSTM_Accuracies, alpha)
-    print('T-test for C-LSTM (Khan) and BiLSTM')
+    t_stat, df, cv, p = independent_ttest(SVM_Accuracies, BiLSTM_Accuracies, alpha)
+    print('T-test for SVM and BiLSTM')
     print('t=%.3f, df=%d, cv=%.3f, p=%.3f' % (t_stat, df, cv, p))
 # interpret via critical value
     if abs(t_stat) <= cv:
