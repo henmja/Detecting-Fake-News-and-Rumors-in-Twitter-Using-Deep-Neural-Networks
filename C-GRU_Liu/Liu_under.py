@@ -180,7 +180,7 @@ es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 num_Norm_Train = num_Norm_Train.to_numpy()
 #time_series_Mat = time_series_Mat.to_numpy()
 print(time_series_Mat.shape)
-model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=2, batch_size=32, callbacks=[es])
+model.fit([time_series_Mat,num_Norm_Train], [target_Train, target_Train], nb_epoch=200, batch_size=32, callbacks=[es])
 
 print(time_series_Mat_Val.shape)
 print(num_Norm_Val.shape)
