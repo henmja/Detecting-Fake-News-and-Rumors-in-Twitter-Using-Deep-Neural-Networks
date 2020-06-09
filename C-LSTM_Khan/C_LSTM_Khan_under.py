@@ -40,8 +40,8 @@ pd.set_option('display.width', 1000)
 import numpy as np
 from imblearn.under_sampling import RandomUnderSampler
 
-df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
-df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
+df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
+#df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 stemmer = SnowballStemmer("english")
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
@@ -124,7 +124,7 @@ print('training: ', target_Train.sum(axis=0))
 print('validation: ', target_Val.sum(axis=0))
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = 'glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
@@ -162,14 +162,14 @@ model.add(Dense(2, activation='sigmoid'))
 opt = keras.optimizers.Adam(learning_rate=0.001)
 model.compile(optimizer=opt, loss='binary_crossentropy', metrics = ['acc'])
 
-history = model.fit(features_Train, target_Train, epochs = 10, batch_size=64, validation_split=0.20)
+history = model.fit(features_Train, target_Train, epochs = 2, batch_size=32, validation_split=0.20)
 
 predictions = model.predict(features_Val)
 from sklearn.metrics import classification_report
 predictions_bool = np.argmax(predictions, axis=1)
 predictions_prob = model.predict_proba(features_Val)
 import pickle
-with open('../T_Test/Khan_C_LSTM_under_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_C_LSTM_under_accuracies.pkl','wb') as f:
     pickle.dump(predictions_prob, f)
 auc = roc_auc_score(target_Val, predictions_prob) 
 target_Val = np.argmax(target_Val, axis=1)
