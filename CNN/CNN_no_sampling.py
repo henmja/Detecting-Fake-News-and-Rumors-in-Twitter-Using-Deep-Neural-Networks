@@ -217,21 +217,21 @@ gridmodel = KerasClassifier(build_fn=create_model,epochs=10, batch_size=5, verbo
 
 batch_size = [8,16,32,64,128]
 epochs = [1,2,3,4,5]
-#param_grid = dict(batch_size=batch_size, epochs=epochs)
-#grid = GridSearchCV(estimator=gridmodel, param_grid=param_grid, n_jobs=-1, cv=3)
-#grid_result = grid.fit(features_Train, target_Train)
+param_grid = dict(batch_size=batch_size, epochs=epochs)
+grid = GridSearchCV(estimator=gridmodel, param_grid=param_grid, n_jobs=-1, cv=3)
+grid_result = grid.fit(features_Train, target_Train)
 # summarize results
-#print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
-#means = grid_result.cv_results_['mean_test_score']
-#stds = grid_result.cv_results_['std_test_score']
-#params = grid_result.cv_results_['params']
-#for mean, stdev, param in zip(means, stds, params):
-#    print("%f (%f) with: %r" % (mean, stdev, param))
-#print(type(grid_result.best_params_))
-#print(len(grid_result.best_params_))
-#print(grid_result.best_params_.keys())
-#epochs_var = grid_result.best_params_['epochs']
-#batch_size_var = grid_result.best_params_['batch_size']
+print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+means = grid_result.cv_results_['mean_test_score']
+stds = grid_result.cv_results_['std_test_score']
+params = grid_result.cv_results_['params']
+for mean, stdev, param in zip(means, stds, params):
+    print("%f (%f) with: %r" % (mean, stdev, param))
+print(type(grid_result.best_params_))
+print(len(grid_result.best_params_))
+print(grid_result.best_params_.keys())
+epochs_var = grid_result.best_params_['epochs']
+batch_size_var = grid_result.best_params_['batch_size']
 
 model = Sequential()
 model.add(InputLayer((sen_Len,),dtype='int32'))
@@ -252,7 +252,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics = ['acc'])
 
 
 print(max_len)
-history = model.fit(features_Train, target_Train, epochs = 2, batch_size=32, validation_split=0.20)
+history = model.fit(features_Train, target_Train, epochs = epochs_var, batch_size=batch_size_var, validation_split=0.20)
 time_series_Val = np.asarray(time_series_Val)
 
 for i,times in enumerate(time_series_Val):
