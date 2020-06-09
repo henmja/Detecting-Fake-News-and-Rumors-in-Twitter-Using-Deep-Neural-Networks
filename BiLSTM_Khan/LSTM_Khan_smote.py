@@ -167,7 +167,7 @@ from sklearn.metrics import classification_report
 predictions_bool = np.argmax(predictions, axis=1)
 predictions_prob = model.predict_proba(features_Val)
 import pickle
-with open('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_BiLSTM_smote_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/Khan_BiLSTM_smote_proba.pkl','wb') as f:
     pickle.dump(predictions_prob, f)
 auc = roc_auc_score(target_Val, predictions_prob) 
 target_Val = np.argmax(target_Val, axis=1)
