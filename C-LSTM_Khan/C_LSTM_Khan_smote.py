@@ -40,7 +40,7 @@ pd.set_option('display.width', 1000)
 import numpy as np
 df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
 stemmer = SnowballStemmer("english")
-#df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
+df.text.apply(lambda txt: ''.join(TextBlob(txt).correct()))
 df['text'] = df['text'].apply(lambda x: stemmer.stem(x)) # Stem every word.
 print('corrected')
 df['created_at'] = df['created_at'].astype(str)
