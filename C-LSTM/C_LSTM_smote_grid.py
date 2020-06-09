@@ -289,7 +289,7 @@ print(predictions_bool.shape)
 print(classification_report(target_Val, predictions_bool,digits=3))
 predictions_prob = model.predict_proba(combined_Val)
 import pickle
-with open('/local/home/henrikm/Fakenews_Classification/T_Test/C-LSTM_smote_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/C-LSTM_smote_proba.pkl','wb') as f:
     pickle.dump(predictions_prob, f)
 target_Val = to_categorical(target_Val)
 auc = roc_auc_score(target_Val, predictions_prob)
