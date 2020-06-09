@@ -162,7 +162,7 @@ opt = keras.optimizers.Adam(learning_rate=0.001)
 model.compile(optimizer=opt, loss='binary_crossentropy', metrics = ['acc'])
 
 
-history = model.fit(features_Train, target_Train, epochs = 2, batch_size=32, validation_split=0.20)
+history = model.fit(features_Train, target_Train, epochs = 10, batch_size=64, validation_split=0.20)
 
 predictions = model.predict(features_Val)
 from sklearn.metrics import classification_report
