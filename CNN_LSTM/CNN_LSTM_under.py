@@ -43,7 +43,7 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 import numpy as np
 
-df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
+df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
 print('before')
 
 from nltk.stem.snowball import SnowballStemmer
@@ -172,7 +172,7 @@ print('validation: ', target_Val.sum(axis=0))
 
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = 'glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
@@ -340,7 +340,7 @@ matrix = metrics.confusion_matrix(target_Val.argmax(axis=1), predictions[0].argm
 print('predictions')
 print(predictions[0])
 import pickle
-with open('../T_Test/C_LSTM_under_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_LSTM_under_accuracies.pkl','wb') as f:
     pickle.dump(predictions[0], f)
 print(predictions[0].argmax(axis=1))
 print('y_pred')
