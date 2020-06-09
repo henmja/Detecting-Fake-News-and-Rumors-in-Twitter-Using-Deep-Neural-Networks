@@ -329,7 +329,7 @@ matrix = metrics.confusion_matrix(target_Val.argmax(axis=1), predictions[0].argm
 print('predictions')
 print(predictions[0])
 import pickle
-with open('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_LSTM_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/CNN_LSTM_proba.pkl','wb') as f:
     pickle.dump(predictions[0], f)
 print(predictions[0].argmax(axis=1))
 print('y_pred')
