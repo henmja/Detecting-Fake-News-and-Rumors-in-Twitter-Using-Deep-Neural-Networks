@@ -34,7 +34,7 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 import numpy as np
 
-df = pd.read_pickle("../Preprocessing/bigdata_preprocessed.pkl")
+df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
 df['created_at'] = df['created_at'].astype(str)
 df['followers'] = df['followers'].astype(str)
 df['following'] = df['following'].astype(str)
@@ -128,7 +128,7 @@ time_series = df['created_at_retweets']
 time_series.reset_index(drop=True, inplace=True)
 for i,time in enumerate(time_series):
     if isinstance(time,float):
-time_series = time_series[indices]
+        time_series = time_series[indices]
 tok_Features = tok_Features[indices]
 labels = label[indices]
 
@@ -148,7 +148,7 @@ print('Number of records in each attribute:')
 
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = '../LSTM/glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
