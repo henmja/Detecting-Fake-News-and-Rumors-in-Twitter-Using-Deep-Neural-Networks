@@ -2,11 +2,11 @@
 import pickle
 import pandas as pd
 
-fakeArticles = pd.read_pickle("fakeArticlesPD.pkl")
-realArticles = pd.read_pickle("realArticlesPD.pkl")
+fakeArticles = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/fakeArticlesPD.pkl")
+realArticles = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesPD.pkl")
 fakeArticles['label'] = 'fake'
 realArticles['label'] = 'real'
-video_indexes_tfidf = pd.read_pickle('../Preprocessing/video_indexes_tfidf.pkl')
+video_indexes_tfidf = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Preprocessing/video_indexes_tfidf.pkl')
 bigdata = realArticles.append(fakeArticles, ignore_index=True)
 print(bigdata.shape)
 bigdata.drop(bigdata.index[video_indexes_tfidf],inplace=True)
@@ -343,7 +343,7 @@ for i, art in enumerate(realArticles['text']):
         try:
             terms[i] = []
             uniqueWords = []
-            realArticlesIDF[i] = {}'
+            realArticlesIDF[i] = {}
             terms[i] = realArticles['text'][i].split()
             words = str(terms[i])
             wordsList = words.split()

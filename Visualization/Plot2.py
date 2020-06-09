@@ -20,7 +20,7 @@ with open('realTweets.pickle', 'rb') as handle:
     
 fakeArticlesPD = pd.read_pickle("fakePD.pkl")
 
-with open('realArticlesDict.pickle', 'rb') as handle:
+with open('/local/home/henrikm/Fakenews_Classification/Visualization/realArticlesDict.pickle', 'rb') as handle:
     realArticlesDict = pickle.load(handle)
 realArticlesPD = pd.DataFrame(realArticlesDict)
 
@@ -28,7 +28,7 @@ realArticlesPD = pd.DataFrame(realArticlesDict)
 import pandas as pd
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
-df = pd.read_pickle("../Preprocessing/bigdataClean.pkl")
+df = pd.read_pickle("/local/home/henrikm/Fakenews_Classification/Preprocessing/bigdata_preprocessed.pkl")
 df.tail()
 
 
