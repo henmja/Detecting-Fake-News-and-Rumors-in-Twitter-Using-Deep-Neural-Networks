@@ -215,7 +215,7 @@ print(y)
 import pandas as pd
 import numpy as np
 from itertools import zip_longest
-realArticlesPD = pd.read_pickle('realTimePD.pkl')
+realArticlesPD = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Visualization/realPD.pkl')
 
 for row in realArticlesPD['followers_count_retweets'].keys():
     try:
