@@ -141,6 +141,7 @@ for row in realArticlesPD['created_at_retweets'].keys():
                     dif_seconds = dif.total_seconds()
                     realArticlesPD['created_at_retweets'][row][i] = dif_seconds/(60*60*24)
             except IndexError:
+                pass
     except AttributeError:
         pass
 
