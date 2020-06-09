@@ -170,8 +170,8 @@ print(x2)
 import pandas as pd
 import numpy as np
 from itertools import zip_longest
-fakeArticlesPD = pd.read_pickle('fakeTimePD.pkl')
-realArticlesPD = pd.read_pickle('realTimePD.pkl')
+fakeArticlesPD = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Visualization/fakePD.pkl')
+realArticlesPD = pd.read_pickle('/local/home/henrikm/Fakenews_Classification/Visualization/realPD.pkl')
 
 for row in fakeArticlesPD['followers_count_retweets'].keys(): 
     try:
