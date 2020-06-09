@@ -250,5 +250,5 @@ import matplotlib.pyplot as plt
 #%matplotlib inline
 
 import pickle
-with open('/local/home/henrikm/Fakenews_Classification/T_Test/SVM_under_accuracies.pkl','wb') as f:
+with open('/local/home/henrikm/Fakenews_Classification/T_Test/SVM_under_proba.pkl','wb') as f:
     pickle.dump(predictions_prob, f)
