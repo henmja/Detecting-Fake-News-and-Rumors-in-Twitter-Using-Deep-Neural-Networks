@@ -128,7 +128,7 @@ from keras.utils import to_categorical
 target_Train_Resampled = to_categorical(target_Train_Resampled)
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/BiLSTM/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
