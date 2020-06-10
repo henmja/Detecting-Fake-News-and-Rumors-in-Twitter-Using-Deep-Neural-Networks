@@ -274,9 +274,9 @@ main_input = Input(shape=(pad_len,), dtype='int32', name='main_input')
 
 x = Embedding(output_dim=512, input_dim=20000, input_length=pad_len)(main_input)
 
-gru_out = Bidirectional(LSTM(32))(x)
-gru_out = Dropout(0.5)(gru_out)
-auxiliary_output = Dense(2, activation='sigmoid', name='aux_output')(gru_out)
+lstm_out = Bidirectional(LSTM(32))(x)
+lstm_out = Dropout(0.5)(gru_out)
+auxiliary_output = Dense(2, activation='sigmoid', name='aux_output')(lstm_out)
 
 auxiliary_input = Input(shape=(13,), name='aux_input')
 e = Embedding(output_dim=512, input_dim=20000, input_length=13)(auxiliary_input)
