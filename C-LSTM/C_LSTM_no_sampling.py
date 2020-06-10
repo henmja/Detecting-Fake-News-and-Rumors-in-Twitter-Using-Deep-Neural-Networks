@@ -149,7 +149,7 @@ print('validation: ', target_Val.sum(axis=0))
 
 
 emb_Dim = 100 # embedding dimensions for word vectors
-glove = '/local/home/henrikm/Fakenews_Classification/LSTM_orig/glove.6B.'+str(emb_Dim)+'d.txt'
+glove = '/local/home/henrikm/Fakenews_Classification/BiLSTM/glove.6B.'+str(emb_Dim)+'d.txt'
 emb_Ind = {}
 f = open(glove, encoding='utf8')
 print('Loading Glove \n')
