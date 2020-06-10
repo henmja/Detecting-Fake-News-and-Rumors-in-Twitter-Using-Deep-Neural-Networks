@@ -73,8 +73,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -89,8 +87,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()    
@@ -105,8 +101,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -121,8 +115,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -137,8 +129,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -153,8 +143,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -169,8 +157,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -185,8 +171,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
@@ -201,8 +185,6 @@ def main():
             else:
                 print('See help flag, -h, for usage.')
                 exit()
-        else:
-            print('See help flag, -h, for usage.')
     except IndexError:
         print('See help flag, -h, for usage.')
         exit()
