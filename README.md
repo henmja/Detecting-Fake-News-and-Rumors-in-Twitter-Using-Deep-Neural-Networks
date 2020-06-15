@@ -1,4 +1,4 @@
-# Master-Thesis-Supervision
+# Detecting Fake News and Rumors in Twitter Using Deep Neural Networks
 References, source code and report.
 
 ## Compilation
